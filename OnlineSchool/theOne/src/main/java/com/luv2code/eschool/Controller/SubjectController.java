@@ -47,12 +47,6 @@ public class SubjectController {
 	}
 	
 	
-	@GetMapping("/subjectUniteLessons/{Subject_id}/{unite_number}")
-	@Operation(summary = "Get lessons in a specific unit in a specific subject.")
-	public List<Lesson> subjectUniteLessons(@PathVariable(value="Subject_id") int subjectId
-										   ,@PathVariable(value="unite_number") int uniteNumber,Model theModel){
-		
-		return subjectService.getSubjectUnitLessons(subjectId, uniteNumber);
-	}
+
 	
 }

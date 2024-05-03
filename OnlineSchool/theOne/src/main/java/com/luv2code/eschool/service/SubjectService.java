@@ -56,14 +56,11 @@ public class SubjectService  {
 		List<Unite> unites = getSubjectUnits(subjectId);
 		
 		for(Unite temp:unites) {
-			
 			if (temp.getNumber()==uniteNumber) {
-				
 				return temp.getLesson();
 			}
 		}
 		return null;
-		
 	}
 	
 	
