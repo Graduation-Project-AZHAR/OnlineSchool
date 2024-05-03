@@ -25,7 +25,7 @@ public class Teacher {
 	private String name;
 	
 	@Column(name="personal_Photo")
-	private String personal_Photo;
+	private String personalPhoto;
 	
 	@Column(name="email")
 	private String email;
@@ -53,9 +53,9 @@ public class Teacher {
 	}
 	
 
-	public Teacher(String name,String personal_Photo, String email, String password) {
+	public Teacher(String name,String personalPhoto, String email, String password) {
 		this.name = name;
-		this.personal_Photo = personal_Photo;
+		this.personalPhoto = personalPhoto;
 		this.email = email;
 		this.password = password;
 		
@@ -65,13 +65,13 @@ public class Teacher {
 	
 
 	
-	public String getPersonal_Photo() {
-		return personal_Photo;
+	public String getPersonalPhoto() {
+		return personalPhoto;
 	}
 
 
-	public void setPersonal_Photo(String personal_Photo) {
-		this.personal_Photo = personal_Photo;
+	public void setPersonalPhoto(String personalPhoto) {
+		this.personalPhoto = personalPhoto;
 	}
 
 	
@@ -118,29 +118,11 @@ public class Teacher {
 	}
 
 
-	
-	public String getPersonalPhoto() {
-		return personal_Photo;
-	}
-
-
-	
-	public void setPersonalPhoto(String personal_Photo) {
-		this.personal_Photo = personal_Photo;
-	}
-
-
-
-	
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////
 
-	@Override
-	public String toString() {
-		return "Teacher [id=" + id + ", name=" + name + ", personal_Photo=" + personal_Photo + ", email=" + email
-				+ ", password=" + password + "]";
-	}
+
 	
 	
 	

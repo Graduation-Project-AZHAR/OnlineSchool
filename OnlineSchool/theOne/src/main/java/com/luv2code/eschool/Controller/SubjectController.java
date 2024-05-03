@@ -34,9 +34,9 @@ public class SubjectController {
 
 	@GetMapping("/subjectNames")
 	@Operation(summary = "Get Subjects Names")
-	public List<String> SubjectNames(Model theModel){
-		List<String> names = subjectService.getSubjectNames();
-		return names;
+	public List<Object> SubjectNames(Model theModel){
+		
+		return subjectService.getSubjectNames();
 	}
 	
 	@GetMapping("/subjectUnites/{Subject_id}")

@@ -1,6 +1,8 @@
 package com.luv2code.eschool.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,11 +30,18 @@ public class SubjectService  {
 	}
 	
 	
-	public List<String> getSubjectNames() {
+	public List<Object> getSubjectNames() {
 		List<Subject> subjects =subjectRepository.findAll();
 		
 		return subjects.stream()
-				.map(Subject::getTitle)
+	            .map(subject -> {
+	                Map<String, Object> subjectMap = new HashMap<>();
+	                subjectMap.put("teacher", subject.getTeacher());
+	                subjectMap.put("title", subject.getTitle());
+	                subjectMap.put("description", subject.getDescription());
+	                subjectMap.put("id", subject.getId());
+	                return subjectMap;
+	            })
 				.collect(Collectors.toList());
 	}
 	
