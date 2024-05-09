@@ -36,7 +36,7 @@ public class SubjectService  {
 		return subjects.stream()
 	            .map(subject -> {
 	                Map<String, Object> subjectMap = new HashMap<>();
-	                subjectMap.put("teacher", subject.getTeacher());
+	                subjectMap.put("teacher Id", subject.getTeacher());
 	                subjectMap.put("title", subject.getTitle());
 	                subjectMap.put("description", subject.getDescription());
 	                subjectMap.put("id", subject.getId());

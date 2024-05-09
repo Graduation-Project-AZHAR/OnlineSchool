@@ -1,6 +1,7 @@
 package com.luv2code.eschool.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,6 +25,21 @@ public class StudentService  {
 		return studentRepostiory.findAll();
 	}
 	
+	public void save(Student theStudent) {
+		studentRepostiory.save(theStudent);
+		
+	}
 	
+	public Student findStudentById(int theId) {
+		Optional<Student> result = studentRepostiory.findById(theId);
+		Student theStudent = new Student() ;
+		if(result.isPresent()) {
+			theStudent=result.get();
+		}else {
+			throw new RuntimeException("Did not find this Student id " + theId);
+		}
+		return theStudent;
+		
+	}
 	
 }

@@ -1,9 +1,7 @@
 package com.luv2code.eschool.Entity;
 
 import java.util.List;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.CollectionTable;
 import jakarta.persistence.Column;
@@ -131,13 +129,6 @@ public class Subject {
 	}
 
 
-	
-	
-	
-	
-	
-	
-	
 	
 	
 	

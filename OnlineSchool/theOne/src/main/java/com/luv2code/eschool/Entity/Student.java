@@ -8,9 +8,6 @@ import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
@@ -19,27 +16,27 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name="student")
-public class Student {
+public class Student extends User {
 	
-	@Id
-	@GeneratedValue(strategy =GenerationType.IDENTITY)
-	@Column(name="id")
-	private int id;
-	
-	@Column(name="name")
-	private String name;
-	
-	@Column(name="personal_Photo")
-	private String personalPhoto;
+//	@Id
+//	@GeneratedValue(strategy =GenerationType.IDENTITY)
+//	@Column(name="id")
+//	private int id;
+//	
+//	@Column(name="name")
+//	private String name;
+//	
+//	@Column(name="personal_Photo")
+//	private String personalPhoto;
 	
 	@Column(name="time_spent")
 	private int timeSpent;
 
-	@Column(name="email")
-	private String email;
-	
-	@Column(name="password")
-	private String password;
+//	@Column(name="email")
+//	private String email;
+//	
+//	@Column(name="password")
+//	private String password;
 	
 	@ManyToOne(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH} )
 	@JoinColumn(name="parent_id")
@@ -59,24 +56,30 @@ public class Student {
 ////////////////////////////////////////////////////////////////////////////////////////////
  
 	public Student() {
-		
-	}
-	
-	
-	public Student(String name,String personalPhoto, String email, String password) {
 		super();
-		this.name = name;
-		this.personalPhoto = personalPhoto;
-		this.email = email;
-		this.password = password;
 	}
 	
+	public Student(String name, String personalPhoto, String email, String password) {
+		super(name, personalPhoto, email, password,"student");
+		// TODO Auto-generated constructor stub
+	}
+
+
+//	public Student(String name,String personalPhoto, String email, String password) {
+//		super();
+//		this.name = name;
+//		this.personalPhoto = personalPhoto;
+//		this.email = email;
+//		this.password = password;
+//	}
+//	
 ////////////////////////////////////////////////////////////////////////////////////////////
 	
 	
-	public String getpersonalPhoto() {
-		return personalPhoto;
-	}
+//	public String getpersonalPhoto() {
+//		return personalPhoto;
+//	}
+
 
 
 	public int getParent() {
@@ -89,9 +92,9 @@ public class Student {
 	}
 
 
-	public void setpersonalPhoto(String personalPhoto) {
-		this.personalPhoto = personalPhoto;
-	}
+//	public void setpersonalPhoto(String personalPhoto) {
+//		this.personalPhoto = personalPhoto;
+//	}
 
 
 	public int getTimeSpent() {
@@ -103,50 +106,44 @@ public class Student {
 		this.timeSpent = timeSpent;
 	}
 	
-	
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-	
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
+//	
+//	public int getId() {
+//		return id;
+//	}
+//
+//	public void setId(int id) {
+//		this.id = id;
+//	}
+//	
+//	public String getName() {
+//		return name;
+//	}
+//
+//	public void setName(String name) {
+//		this.name = name;
+//	}
+//
+//	public String getEmail() {
+//		return email;
+//	}
+//
+//	public void setEmail(String email) {
+//		this.email = email;
+//	}
+//
+//	public String getPassword() {
+//		return password;
+//	}
+//
+//	public void setPassword(String password) {
+//		this.password = password;
+//	}
+//
 
 	
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////
 
-	@Override
-	public String toString() {
-		return "Student [id=" + id + ", name=" + name + ", personal Photo=" + personalPhoto + ", email=" + email
-				+ ", password=" + password + "]";
-	}
-	
 	
 }

@@ -42,7 +42,7 @@ public class LessonController {
 							  ,@PathVariable(value="unite_number") int uniteNumber
 							  ,@PathVariable(value="Lesson_number") int LessonNumber,Model theModel){
 		
-		return lessonService.getOneLesson(subjectId, uniteNumber,LessonNumber);
+		return lessonService.getLessonByLocation(subjectId, uniteNumber,LessonNumber);
 	}
 	
 	

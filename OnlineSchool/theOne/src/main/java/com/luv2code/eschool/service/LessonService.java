@@ -52,7 +52,7 @@ public class LessonService {
 	}
 	
 	
-	public Lesson getOneLesson (int subjectId,int uniteNumber,int LessonNumber) {
+	public Lesson getLessonByLocation (int subjectId,int uniteNumber,int LessonNumber) {
 		List<Lesson> lessons =  subjectService.getSubjectUnitLessons(subjectId, uniteNumber);
 		Lesson theLesson = null;
 		
