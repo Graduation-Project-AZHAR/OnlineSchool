@@ -23,7 +23,7 @@ public class SubjectController {
 	
 
 	@GetMapping("/subjects")
-	@Operation(summary = "Get Subjects data")
+	@Operation(summary = "Get Subject data")
 	public List<Subject> SubjectList(Model theModel){
 		List<Subject> All = subjectService.findAll();
 		return All;
@@ -37,7 +37,7 @@ public class SubjectController {
 	}
 	
 	@GetMapping("/subjectUnites/{Subject_id}")
-	@Operation(summary = "Get Subjects Unites")
+	@Operation(summary = "Get Subject Unites")
 	public List<Unite> SubjectUnites(@PathVariable(value="Subject_id") int subjectid,Model theModel){
 		
 		return subjectService.getSubjectUnits(subjectid);
