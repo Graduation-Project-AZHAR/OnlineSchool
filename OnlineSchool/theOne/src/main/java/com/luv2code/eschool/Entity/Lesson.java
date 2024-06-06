@@ -2,6 +2,8 @@ package com.luv2code.eschool.Entity;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.CollectionTable;
 import jakarta.persistence.Column;
@@ -47,6 +49,7 @@ public class Lesson {
 	
 	@ManyToOne(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH} )
 	@JoinColumn(name="unite_id")
+	@JsonIgnore
 	private Unite unite;
 	
 	@OneToOne(cascade = CascadeType.ALL)
@@ -111,6 +114,11 @@ public class Lesson {
 		this.pictureUrl = pictureUrl;
 	}
 
+	public int getUniteNumber() {
+		return unite.getNumber();
+	}
+	
+	
 	public int getUnite() {
 		return unite.getId();
 	}
@@ -120,6 +128,9 @@ public class Lesson {
 	}
 
 	public int getExercise() {
+		if(exercise==null) {
+			return 0;
+		}
 		return exercise.getNumber();
 	}
 

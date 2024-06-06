@@ -1,5 +1,6 @@
 package com.luv2code.eschool.Entity;
 
+import java.util.ArrayList;
 import java.util.List;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.CascadeType;
@@ -89,6 +90,9 @@ public class Unite {
 
 
 		public int getExerciseNumber() {
+			if(exercise==null) {
+				return 0;
+			}
 			return exercise.getNumber();
 		}
 
@@ -132,10 +136,14 @@ public class Unite {
 			this.description = description;
 		}
 
-
-		@Override
-		public String toString() {
-			return "Unite [number=" + id + ", title=" + title + ", description=" + description + "]";
+		
+		public void AddLesson(Lesson theLesson) {
+			
+			if(lesson==null) {
+				lesson=new ArrayList<>();
+			}
+			lesson.add(theLesson);
+			theLesson.setUnite(this);
 		}
 		
 	

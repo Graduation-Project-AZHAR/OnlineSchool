@@ -4,7 +4,9 @@ import java.util.List;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.luv2code.eschool.Entity.Lesson;
 import com.luv2code.eschool.service.LessonService;
@@ -31,9 +33,9 @@ public class LessonController {
 	@GetMapping("/uniteLessons/{Subject_id}/{unite_number}")
 	@Operation(summary = "Get All lessons in a specific unit in a specific subject.")
 	public List<Object> uniteLessons(@PathVariable(value="Subject_id") int subjectId
-										   ,@PathVariable(value="unite_number") int uniteNumber,Model theModel){
+									,@PathVariable(value="unite_number") int uniteNumber,Model theModel){
 		
-		return lessonService.getSubjectUnitLessons(subjectId, uniteNumber);
+		return lessonService.getUnitLessons(subjectId, uniteNumber);
 	}
 	
 	@GetMapping("/getOneLesson/{Subject_id}/{unite_number}/{Lesson_number}")
@@ -42,8 +44,23 @@ public class LessonController {
 							  ,@PathVariable(value="unite_number") int uniteNumber
 							  ,@PathVariable(value="Lesson_number") int LessonNumber,Model theModel){
 		
-		return lessonService.getLessonByLocation(subjectId, uniteNumber,LessonNumber);
+		return lessonService.getOneLesson(subjectId, uniteNumber,LessonNumber);
 	}
+	
+	
+	@PostMapping("/AddNewLesson")
+	@Operation(summary = "Add new Lesson")
+	public void AddLesson(  @RequestParam("SubjectId")int SubjectId,
+								@RequestParam("UniteNumber")int UniteNumber,
+								@RequestParam("title")String title,
+								@RequestParam("video_url")String videoUrl,
+								@RequestParam("explantions")List<String> explantions,
+								@RequestParam("picture_url")List<String> pictureUrl) {
+		Lesson newLesson = new Lesson (title,0,videoUrl,explantions,pictureUrl);
+		lessonService.AddLesson(newLesson,SubjectId,UniteNumber);
+		
+	}
+	
 	
 	
 }

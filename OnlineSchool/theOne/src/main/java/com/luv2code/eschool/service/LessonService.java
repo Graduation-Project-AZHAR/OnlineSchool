@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.luv2code.eschool.Entity.Lesson;
+import com.luv2code.eschool.Entity.Unite;
 import com.luv2code.eschool.repository.LessonRepository;
 
 @Service
@@ -15,11 +16,13 @@ public class LessonService {
 	
 	private LessonRepository lessonRepository;
 	private SubjectService  subjectService;
+	private UniteService uniteService ;
 
 	@Autowired
-	public LessonService(LessonRepository lessonRepository,SubjectService  subjectService) {
+	public LessonService(LessonRepository lessonRepository,SubjectService  subjectService,UniteService uniteService) {
 		this.lessonRepository = lessonRepository;
 		this.subjectService=subjectService;
+		this.uniteService=uniteService;
 	}
 	
 	public List<Lesson> findAll (){
@@ -27,8 +30,8 @@ public class LessonService {
 	 	return lessonRepository.findAll();
 	}
 
-	public List<Object> getSubjectUnitLessons(int subjectId,int uniteNumber){
-		List<Lesson> lessons =  subjectService.getSubjectUnitLessons(subjectId, uniteNumber);
+	public List<Object> getUnitLessons(int subjectId,int uniteNumber){
+		List<Lesson> lessons =  subjectService.getUnitLessons(subjectId, uniteNumber);
 		
 		return lessons.stream()
                 .map(lesson -> {
@@ -52,8 +55,8 @@ public class LessonService {
 	}
 	
 	
-	public Lesson getLessonByLocation (int subjectId,int uniteNumber,int LessonNumber) {
-		List<Lesson> lessons =  subjectService.getSubjectUnitLessons(subjectId, uniteNumber);
+	public Lesson getOneLesson (int subjectId,int uniteNumber,int LessonNumber) {
+		List<Lesson> lessons =  subjectService.getUnitLessons(subjectId, uniteNumber);
 		Lesson theLesson = null;
 		
 		for (Lesson tempLesson:lessons) {
@@ -64,4 +67,14 @@ public class LessonService {
 		return theLesson;
 	}
 	
+	
+	
+	public void AddLesson(Lesson theLesson,int SupjectId,int UniteNumber) {
+		
+		theLesson.setNumber(subjectService.LastLessonNumber(SupjectId,UniteNumber)+1);
+		Unite tempUnite =subjectService.getOneUnite(SupjectId, UniteNumber);
+		tempUnite.AddLesson(theLesson);
+		uniteService.save(tempUnite);
+		
+	}
 }

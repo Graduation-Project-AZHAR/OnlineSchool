@@ -60,16 +60,44 @@ public class SubjectService  {
 	}
 	
 	
-	public List<Lesson> getSubjectUnitLessons(int subjectId,int uniteNumber){
-		
+	
+	public int lastUnitNumber(int subjectId) {
 		List<Unite> unites = getSubjectUnits(subjectId);
-		
+		int theNumber=0;
 		for(Unite temp:unites) {
-			if (temp.getNumber()==uniteNumber) {
-				return temp.getLesson();
+			if (temp.getNumber()>theNumber) {
+			theNumber=temp.getNumber();
 			}
 		}
-		return null;
+		return theNumber;
+	}
+	
+	public int LastLessonNumber(int subjectId,int uniteNumber) {
+		List<Lesson> lessons = getUnitLessons(subjectId,uniteNumber);
+		int theNumber=0;
+		for(Lesson temp:lessons) {
+			if (temp.getNumber()>theNumber) {
+			theNumber=temp.getNumber();
+			}
+		}
+		return theNumber;
+	}
+	
+	public Unite getOneUnite(int subjectId,int uniteNumber) {
+		List<Unite> unites = getSubjectUnits(subjectId);
+		Unite theUnite=null;
+		for(Unite temp:unites) {
+			if (temp.getNumber()==uniteNumber) {
+				theUnite = temp;
+			}
+		}
+		return theUnite;
+	}
+	
+	
+	public List<Lesson> getUnitLessons(int subjectId,int uniteNumber){
+		
+		return getOneUnite(subjectId,uniteNumber).getLesson();
 	}
 	
 	

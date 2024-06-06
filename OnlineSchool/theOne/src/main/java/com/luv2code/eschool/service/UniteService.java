@@ -25,5 +25,10 @@ public class UniteService {
 		
 	}
 	
+	public void save(Unite theUnite) {
+		
+		uniteRepository.save(theUnite);
+	}
+	
 
 }
