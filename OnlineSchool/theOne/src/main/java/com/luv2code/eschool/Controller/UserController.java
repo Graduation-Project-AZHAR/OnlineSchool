@@ -1,16 +1,13 @@
 package com.luv2code.eschool.Controller;
 
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.luv2code.eschool.Entity.Parent;
-import com.luv2code.eschool.Entity.Student;
-import com.luv2code.eschool.Entity.User;
+import com.luv2code.eschool.Entity.*;
 import com.luv2code.eschool.service.ParentService;
 import com.luv2code.eschool.service.StudentService;
+import com.luv2code.eschool.service.TeacherService;
 import com.luv2code.eschool.service.UserService;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -19,15 +16,19 @@ import io.swagger.v3.oas.annotations.Operation;
 @RequestMapping("/user")
 public class UserController {
 	
-	private UserService userService;
+	private UserService    userService;
 	private StudentService studentService;
-	private ParentService parentService;
+	private ParentService  parentService;
+	private TeacherService teacherService;
 	
-	public UserController (UserService userService,StudentService studentService,ParentService parentService) {
+	
+	public UserController (UserService userService,StudentService studentService,
+						   ParentService parentService,TeacherService teacherService) {
 		
-		this.userService=userService;
-		this.studentService=studentService;
-		this.parentService=parentService;
+		this.userService    = userService;
+		this.studentService = studentService;
+		this.parentService  = parentService;
+		this.teacherService = teacherService;
 	}
 	
 
@@ -51,9 +52,12 @@ public class UserController {
 		theParent = parentService.getParentById(parentId);
 		Student theStudent= new Student(name,"", theEmail,password);
 		theStudent.setParent(theParent);
-		theStudent.setTimeSpent(96);
+		theStudent.setTimeSpent(0);
 		studentService.save(theStudent);
-		}	
+		
+		}else {
+			throw new RuntimeException("this Email is Already used :-( ");
+		}
 	}
 	
 	@PostMapping("/ParentSignUp")
@@ -63,10 +67,30 @@ public class UserController {
 							 	@RequestParam("password")String password) {
 		
 		if(userService.checkUsedEmails(theEmail)) {
-		Parent theParent = new Parent(name,"", theEmail,password);
-		parentService.save(theParent);
+			Parent theParent = new Parent(name,"", theEmail,password);
+			parentService.save(theParent);
+		}else {
+			throw new RuntimeException("this Email is Already used :-( ");
 		}
 	}
+	@PostMapping("/addTeacher")
+	@Operation(summary = "Add new teacher by Manger")
+	public void AddTeacher(@RequestParam("name")String name,
+						   @RequestParam("email")String Email,
+						   @RequestParam("password")String password ) {
+		
+		if(userService.checkUsedEmails(Email)) {
+			Teacher theTeacher = new Teacher(name,"",Email,password);
+			teacherService.save(theTeacher);
+		}else {
+			throw new RuntimeException("this Email is Already used :-( ");
+		}
+		
+	}
+	
+	
+	
+	
 	
 	@PostMapping("/login")
 	@Operation(summary = "login and return User type(student,teacher,parent ....) or return false if the Email or password is incorrect")

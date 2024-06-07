@@ -15,19 +15,20 @@ public class TeacherService   {
 
 private TeacherRepository teacherRepository;
 
-    DAO dao;
 	
 	@Autowired
-	public TeacherService(TeacherRepository teacherRepository,DAO dao) {
+	public TeacherService(TeacherRepository teacherRepository) {
 		this.teacherRepository=teacherRepository;
-		this.dao=dao;
 	}
 
 	public List<Teacher> findAll() {
 		return teacherRepository.findAll();
 	}
 	
-	
+	public void save (Teacher teacher) {
+		
+		teacherRepository.save(teacher);
+	}
 	
 	
 }

@@ -2,12 +2,8 @@ package com.luv2code.eschool.service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.luv2code.eschool.Entity.Parent;
 import com.luv2code.eschool.Entity.User;
 import com.luv2code.eschool.repository.UserRepository;
 
@@ -51,6 +47,10 @@ public class UserService {
 		}
 		return theUser;
 		}
+	
+	
+	
+	
 	
 	public User login(String theEmail,String Password) {
 		

@@ -2,11 +2,12 @@ package com.luv2code.eschool.Controller;
 
 import java.util.List;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.luv2code.eschool.Entity.*;
 import com.luv2code.eschool.service.*;
-
 import ch.qos.logback.core.model.Model;
 import io.swagger.v3.oas.annotations.Operation;
 
@@ -29,6 +30,5 @@ public class TeacherController {
 		List<Teacher> All = teacherService.findAll();
 		return All;
 	}
-	
-	
+
 }
