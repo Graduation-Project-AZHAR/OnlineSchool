@@ -21,9 +21,9 @@ public class ExerciseService {
 	public List<Exercise> findAll() {
 		return exerciseRepository.findAll();
 	}
-	public Exercise findById() {
+	public Exercise findById(int exerciseId) {
 		
-		Optional<Exercise> result = exerciseRepository.findById(1);
+		Optional<Exercise> result = exerciseRepository.findById(exerciseId);
 		Exercise theExercise = null;
 		
 		if(result.isPresent()) {

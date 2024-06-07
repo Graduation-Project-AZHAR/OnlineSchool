@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -48,19 +49,34 @@ public class LessonController {
 	}
 	
 	
-	@PostMapping("/AddNewLesson")
+	@PostMapping("/AddNewLesson/{subjectId}/{uniteNumber}")
 	@Operation(summary = "Add new Lesson")
-	public void AddLesson(  @RequestParam("SubjectId")int SubjectId,
-								@RequestParam("UniteNumber")int UniteNumber,
-								@RequestParam("title")String title,
-								@RequestParam("video_url")String videoUrl,
-								@RequestParam("explantions")List<String> explantions,
-								@RequestParam("picture_url")List<String> pictureUrl) {
+	public void AddLesson(@PathVariable("subjectId") int subjectId,
+            			  @PathVariable("uniteNumber") int uniteNumber,
+					   	  @RequestParam("title")String title,
+						  @RequestParam("video_url")String videoUrl,
+						  @RequestParam("explantions")List<String> explantions,
+						  @RequestParam("picture_url")List<String> pictureUrl) {
 		Lesson newLesson = new Lesson (title,0,videoUrl,explantions,pictureUrl);
-		lessonService.AddLesson(newLesson,SubjectId,UniteNumber);
+		lessonService.AddLesson(newLesson,subjectId,uniteNumber);
 		
 	}
-	
+	@PutMapping("/UpdateLesson/{subjectId}/{uniteNumber}/{lessonNumber}")
+	@Operation(summary = "Update a specific Lesson")
+	public void updateLesson(@PathVariable("subjectId") int subjectId,
+	                         @PathVariable("uniteNumber") int uniteNumber,
+	                         @PathVariable("lessonNumber") int lessonNumber,
+	                         @RequestParam(value = "title", required = false) String title,
+	                         @RequestParam(value = "video_url", required = false) String videoUrl,
+	                         @RequestParam(value = "explantions", required = false) List<String> explantions,
+	                         @RequestParam(value = "picture_url", required = false) List<String> pictureUrl,
+	                         @RequestParam(value = "NewLessonNumber", required = false) Integer newLessonNumber) {
+		
+	   // Lesson newLesson = new Lesson(title, newLessonNumber != null ? newLessonNumber : lessonNumber, videoUrl, explantions, pictureUrl);
+		  lessonService.updateLesson(subjectId, uniteNumber, lessonNumber,title,videoUrl,explantions,pictureUrl,newLessonNumber);
+	}
+
+
 	
 	
 }

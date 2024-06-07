@@ -54,6 +54,7 @@ public class Lesson {
 	
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "exercise_number")
+	@JsonIgnore
 	private Exercise exercise ;
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
@@ -127,11 +128,16 @@ public class Lesson {
 		this.unite = unite;
 	}
 
-	public int getExercise() {
+	public int getExerciseNumber() {
 		if(exercise==null) {
 			return 0;
 		}
-		return exercise.getNumber();
+		return this.exercise.getNumber();
+	}
+	
+	public Exercise getExercise() {
+
+		return this.exercise;
 	}
 
 	public void setExercise(Exercise exercise) {

@@ -7,6 +7,8 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.luv2code.eschool.Entity.Exercise;
 import com.luv2code.eschool.Entity.Lesson;
 import com.luv2code.eschool.Entity.Unite;
 import com.luv2code.eschool.repository.LessonRepository;
@@ -17,12 +19,15 @@ public class LessonService {
 	private LessonRepository lessonRepository;
 	private SubjectService  subjectService;
 	private UniteService uniteService ;
+	private ExerciseService exerciseService;
 
 	@Autowired
-	public LessonService(LessonRepository lessonRepository,SubjectService  subjectService,UniteService uniteService) {
+	public LessonService(LessonRepository lessonRepository,SubjectService  subjectService
+						,UniteService uniteService ,ExerciseService exerciseService) {
 		this.lessonRepository = lessonRepository;
 		this.subjectService=subjectService;
 		this.uniteService=uniteService;
+		this.exerciseService=exerciseService;
 	}
 	
 	public List<Lesson> findAll (){
@@ -61,10 +66,11 @@ public class LessonService {
 		
 		for (Lesson tempLesson:lessons) {
 			if(tempLesson.getNumber()==LessonNumber) {
-				theLesson=tempLesson;
+				return tempLesson;
 			}
 		}
-		return theLesson;
+		throw new RuntimeException("\n////////////////////////////\nDid not find this Lesson :-( \n////////////////////////////\n");
+		
 	}
 	
 	
@@ -77,4 +83,26 @@ public class LessonService {
 		uniteService.save(tempUnite);
 		
 	}
+	
+	public void updateLesson(int SupjectId,int UniteNumber,int LessonNumber,String title,
+								String videoUrl,List<String> explantions,List<String> pictureUrl
+								,Integer newLessonNumber) {
+		
+		Lesson theLesson= getOneLesson(SupjectId,UniteNumber,LessonNumber);
+		
+		if(title!=null) {
+			theLesson.setTitle(title);}
+		if(videoUrl!=null) {
+			theLesson.setVideo_url(videoUrl);}
+		if(explantions!=null) {
+			theLesson.setExplantions(explantions);}
+		if(pictureUrl!=null) {
+			theLesson.setPictureUrl(pictureUrl);}
+		if(newLessonNumber!=null) {
+			theLesson.setNumber(newLessonNumber);}
+		lessonRepository.save(theLesson);
+	}
+	
+	
+	
 }

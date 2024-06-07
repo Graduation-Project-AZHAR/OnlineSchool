@@ -43,6 +43,7 @@ public class Unite {
 		
 		@OneToOne(cascade = CascadeType.ALL)
 		@JoinColumn(name = "exercise_number")
+		@JsonIgnore
 		private Exercise exercise ;
 		
 		@ManyToOne(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH} )
@@ -88,12 +89,16 @@ public class Unite {
 			this.lesson = lesson;
 		}
 
-
 		public int getExerciseNumber() {
 			if(exercise==null) {
 				return 0;
 			}
-			return exercise.getNumber();
+			return this.exercise.getNumber();
+		}
+		
+		public Exercise getExercise() {
+
+			return this.exercise;
 		}
 
 
