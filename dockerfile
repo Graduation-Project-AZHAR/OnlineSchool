@@ -21,7 +21,7 @@ FROM openjdk:17-jdk-slim
 WORKDIR /app
 
 # Copy the jar file from the build stage
-COPY --from=build /app/target/theOne.jar app.jar
+COPY --from=build /app/target/theOne-0.0.1-SNAPSHOT.jar app.jar
 
 # Expose the application port
 EXPOSE 8080
