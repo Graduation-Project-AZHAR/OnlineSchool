@@ -72,7 +72,6 @@ public class LessonController {
 	                         @RequestParam(value = "picture_url", required = false) List<String> pictureUrl,
 	                         @RequestParam(value = "NewLessonNumber", required = false) Integer newLessonNumber) {
 		
-	   // Lesson newLesson = new Lesson(title, newLessonNumber != null ? newLessonNumber : lessonNumber, videoUrl, explantions, pictureUrl);
 		  lessonService.updateLesson(subjectId, uniteNumber, lessonNumber,title,videoUrl,explantions,pictureUrl,newLessonNumber);
 	}
 

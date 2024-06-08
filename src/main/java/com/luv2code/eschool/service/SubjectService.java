@@ -17,11 +17,12 @@ import com.luv2code.eschool.repository.SubjectRepository;
 public class SubjectService  {
 	
 	private SubjectRepository subjectRepository ;
+	private TeacherService teacherService;
 	
 	@Autowired
-	public SubjectService(SubjectRepository subjectRepository) {
-		this.subjectRepository=subjectRepository;
-		
+	public SubjectService(SubjectRepository subjectRepository,TeacherService teacherService) {
+		this.subjectRepository  = subjectRepository;
+		this.teacherService     = teacherService;
 	}
 
 	
@@ -45,17 +46,25 @@ public class SubjectService  {
 				.collect(Collectors.toList());
 	}
 	
-	
-	
-	public List<Unite> getSubjectUnits(int subjectId) {
+	public Subject getSubjectById(int subjectId) {
+		
 		Optional<Subject> result = subjectRepository.findById(subjectId);
 		Subject theSubject=null;
 		
 		if (result.isPresent()) {
 			theSubject=result.get();
 		}else {
-			throw new RuntimeException("Did not find Subject id - " + subjectId);
+			throw new RuntimeException("Did not find Subject id : " + subjectId+" :-( ");
 		}
+		return theSubject;
+	}
+	
+	
+	
+	public List<Unite> getSubjectUnits(int subjectId) {
+		
+		Subject theSubject=getSubjectById(subjectId);
+		
 		return theSubject.getUnite();
 	}
 	
@@ -98,6 +107,20 @@ public class SubjectService  {
 	public List<Lesson> getUnitLessons(int subjectId,int uniteNumber){
 		
 		return getOneUnite(subjectId,uniteNumber).getLesson();
+	}
+	
+	public void save (int subjectId,String title,String description ,Integer teacherId) {
+		
+		Subject theSubject = getSubjectById(subjectId);
+		
+		if(title!=null) {
+			theSubject.setTitle(title);}
+		if(description!=null) {
+			theSubject.setDescription(description);}
+		if(teacherId!=null) {
+			theSubject.setTeacher(teacherService.getTeacherById(teacherId));}
+		
+		subjectRepository.save(theSubject);
 	}
 	
 	

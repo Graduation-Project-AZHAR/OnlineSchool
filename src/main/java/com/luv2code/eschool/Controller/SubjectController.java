@@ -3,7 +3,9 @@ package com.luv2code.eschool.Controller;
 import java.util.List;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.luv2code.eschool.Entity.Subject;
 import com.luv2code.eschool.Entity.Unite;
@@ -43,7 +45,15 @@ public class SubjectController {
 		return subjectService.getSubjectUnits(subjectid);
 	}
 	
-	
-
+	@PutMapping("/updateSubject/{subjectId}")
+	@Operation(summary = "edit a specific Subject")
+	public void UpdateSubject(@PathVariable("subjectId")int subjectId,
+							  @RequestParam(value="title",required = false)String title,
+							  @RequestParam(value="description",required = false) String description,
+							  @RequestParam(value="teacherId",required = false) Integer teacherId) {
+		
+		subjectService.save(subjectId, title, description, teacherId);
+		
+	}
 	
 }
