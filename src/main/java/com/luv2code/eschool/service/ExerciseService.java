@@ -40,14 +40,26 @@ public class ExerciseService {
 	public void AddLessonExercise (int subjectId,int uniteNumber,int lessonNumber,
 								   String question, String Answer,List<String> options) {
 		
-		Exercise newExercise =new Exercise ();
-		QuestionAndAnswer questionAndAnswer = new QuestionAndAnswer(question,options,Answer,1);
-		newExercise.addQuestionAndAnswer(questionAndAnswer);
-		exerciseRepository.save(newExercise);
-		
 		Lesson theLesson = lessonService.getOneLesson(subjectId, uniteNumber, lessonNumber);
-		theLesson.setExercise(newExercise);
+		
+		if(theLesson.getExercise()==null) {
+			
+		Exercise theExercise =new Exercise ();
+		QuestionAndAnswer questionAndAnswer = new QuestionAndAnswer(question,options,Answer,1);
+		theExercise.addQuestionAndAnswer(questionAndAnswer);
+		exerciseRepository.save(theExercise);
+		theLesson.setExercise(theExercise);
 		lessonService.updateLesson(theLesson);
+		}else {
+			Exercise theExercise =theLesson.getExercise();
+			
+			int questionNumber = theExercise.getQuestionAndAnswer().size()+1;
+			
+			QuestionAndAnswer questionAndAnswer = new QuestionAndAnswer(question,options,Answer,questionNumber);
+			theExercise.addQuestionAndAnswer(questionAndAnswer);
+			exerciseRepository.save(theExercise);
+			
+		}
 		
 	}
 	

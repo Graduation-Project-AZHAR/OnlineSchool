@@ -44,11 +44,15 @@ public class ExerciseController {
 	public void AddLessonExercise (@PathVariable("subjectId") int subjectId,
 						           @PathVariable("uniteNumber") int uniteNumber,
 						           @PathVariable("lessonNumber") int lessonNumber, 
-						           @RequestParam("firstQuestion") String question,
+						           @RequestParam("Question") String question,
 			                       @RequestParam("Answer") String Answer,
 			                       @RequestParam("options") List<String> options) {
 		
 		exerciseService.AddLessonExercise(subjectId, uniteNumber, lessonNumber, question, Answer, options);
 		
 	}
+	
+	
+	
+	
 }
