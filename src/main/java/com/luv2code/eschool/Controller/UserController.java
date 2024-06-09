@@ -89,13 +89,10 @@ public class UserController {
 	}
 	
 	
-	
-	
-	
 	@PostMapping("/login")
 	@Operation(summary = "login and return User type(student,teacher,parent ....) or return false if the Email or password is incorrect")
-	public String login(      @RequestParam("email")String theEmail,
-						 	@RequestParam("password")String password) {
+	public String login(@RequestParam("email")String theEmail,
+						@RequestParam("password")String password) {
 		User theUser =userService.login(theEmail, password);
 		if (theUser==null) {
 			return "false";
