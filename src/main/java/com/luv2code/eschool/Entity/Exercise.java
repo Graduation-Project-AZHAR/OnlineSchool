@@ -2,9 +2,7 @@ package com.luv2code.eschool.Entity;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.CollectionTable;
 import jakarta.persistence.Column;
@@ -18,6 +16,7 @@ import jakarta.persistence.Table;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 
 
 @Entity
@@ -29,16 +28,10 @@ public class Exercise {
     @Column(name="number")
     private int number;
    
-    @ElementCollection
-    @CollectionTable(name="ExerciseQuestionsAnswers")
-    @Column(name="question")
-    private List<String> question;
-    
-    @ElementCollection
-    @CollectionTable(name="ExerciseQuestionsAnswers")
-    @Column(name="answer")
-    private List<String> answer;
 
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name="exercise_id")
+    private List<QuestionAndAnswer> questionAndAnswer;
     
     
     @ManyToMany(fetch=FetchType.LAZY ,
@@ -61,23 +54,6 @@ public class Exercise {
 		this.number = number;
 	}
 
-	public List<String> getQuestions() {
-		return question;
-	}
-
-	public void setQuestions(List<String> questions) {
-		this.question = questions;
-	}
-
-	public List<String> getAnswers() {
-		return answer;
-	}
-
-	public void setAnswers(List<String> answers) {
-		this.answer = answers;
-	}
-
-
 	
 	public List<Student> getStudents() {
 		return students;
@@ -93,19 +69,28 @@ public class Exercise {
 		
 	}
 
-	public Exercise(List<String> questions, List<String> answers) {
+	public Exercise(int number) {
 		super();
-		this.question = questions;
-		this.answer = answers;
+		this.number = number;
 	}
 
 
-	public void addQuestion (String theQuestion) {
+	public List<QuestionAndAnswer> getQuestionAndAnswer() {
+		return questionAndAnswer;
+	}
+
+
+	public void setQuestionAndAnswer(List<QuestionAndAnswer> questionAndAnswer) {
+		this.questionAndAnswer = questionAndAnswer;
+	}
+
+
+	public void addQuestionAndAnswer (QuestionAndAnswer theQuestionAndAnswer) {
 		
-		if (question==null) {
-			question=new ArrayList<>();
+		if (questionAndAnswer==null) {
+			questionAndAnswer=new ArrayList<>();
 		}
-		question.add(theQuestion);
+		questionAndAnswer.add(theQuestionAndAnswer);
 		
 	}
 	

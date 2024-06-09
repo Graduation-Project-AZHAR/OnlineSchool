@@ -41,15 +41,7 @@ public class Subject {
 	@JsonIgnore
 	private List<Unite> unite;
 
-    @ElementCollection
-    @CollectionTable(name="TestQuestionsAnswers")
-    @Column(name="question")
-    private List<String> question;
-    
-    @ElementCollection
-    @CollectionTable(name="TestQuestionsAnswers")
-    @Column(name="answer")
-    private List<String> answer;
+
 	
 
 	
@@ -72,22 +64,6 @@ public class Subject {
 
 	public int getId() {
 		return id;
-	}
-
-	public List<String> getQuestion() {
-		return question;
-	}
-
-	public void setQuestion(List<String> question) {
-		this.question = question;
-	}
-
-	public List<String> getAnswer() {
-		return answer;
-	}
-
-	public void setAnswer(List<String> answer) {
-		this.answer = answer;
 	}
 
 	public String getDescription() {

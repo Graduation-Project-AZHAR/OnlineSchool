@@ -4,11 +4,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.luv2code.eschool.Entity.Exercise;
 import com.luv2code.eschool.Entity.Lesson;
 import com.luv2code.eschool.Entity.Unite;
 import com.luv2code.eschool.repository.LessonRepository;
@@ -19,15 +16,13 @@ public class LessonService {
 	private LessonRepository lessonRepository;
 	private SubjectService  subjectService;
 	private UniteService uniteService ;
-	private ExerciseService exerciseService;
 
 	@Autowired
 	public LessonService(LessonRepository lessonRepository,SubjectService  subjectService
-						,UniteService uniteService ,ExerciseService exerciseService) {
+						,UniteService uniteService) {
 		this.lessonRepository = lessonRepository;
 		this.subjectService=subjectService;
 		this.uniteService=uniteService;
-		this.exerciseService=exerciseService;
 	}
 	
 	public List<Lesson> findAll (){
@@ -62,7 +57,6 @@ public class LessonService {
 	
 	public Lesson getOneLesson (int subjectId,int uniteNumber,int LessonNumber) {
 		List<Lesson> lessons =  subjectService.getUnitLessons(subjectId, uniteNumber);
-		Lesson theLesson = null;
 		
 		for (Lesson tempLesson:lessons) {
 			if(tempLesson.getNumber()==LessonNumber) {
@@ -82,6 +76,11 @@ public class LessonService {
 		tempUnite.AddLesson(theLesson);
 		uniteService.save(tempUnite);
 		
+	}
+	
+	public void updateLesson(Lesson theLesson) {
+		
+		lessonRepository.save(theLesson);
 	}
 	
 	public void updateLesson(int SupjectId,int UniteNumber,int LessonNumber,String title,
