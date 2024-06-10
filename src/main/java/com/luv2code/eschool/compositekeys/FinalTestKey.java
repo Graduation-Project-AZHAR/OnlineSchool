@@ -48,6 +48,11 @@ public class FinalTestKey implements Serializable {
 	public void setSubject(Subject subject) {
 		this.subject = subject;
 	}
+
+	@Override
+	public String toString() {
+		return "FinalTestKey [student=" + student + ", subject=" + subject + "]";
+	}
 	
 	
 	

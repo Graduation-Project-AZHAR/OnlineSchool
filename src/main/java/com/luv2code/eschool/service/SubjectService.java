@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.luv2code.eschool.Entity.FinalQuestionAnswer;
 import com.luv2code.eschool.Entity.Lesson;
 import com.luv2code.eschool.Entity.Subject;
 import com.luv2code.eschool.Entity.Unite;
@@ -109,6 +110,13 @@ public class SubjectService  {
 		return getOneUnite(subjectId,uniteNumber).getLesson();
 	}
 	
+	
+	public void save(Subject theSubject) {
+		
+		subjectRepository.save(theSubject);
+	}
+	
+	
 	public void save (int subjectId,String title,String description ,Integer teacherId) {
 		
 		Subject theSubject = getSubjectById(subjectId);
@@ -121,6 +129,25 @@ public class SubjectService  {
 			theSubject.setTeacher(teacherService.getTeacherById(teacherId));}
 		
 		subjectRepository.save(theSubject);
+	}
+	
+	public void AddSubjectFinelTest (int SubjectId,String question, String Answer,List<String> FinalOptions) {
+	
+		Subject theSubject = getSubjectById(SubjectId);
+		
+		if(theSubject.getFinalQuestionAnswer()==null) {
+			
+			FinalQuestionAnswer finalQuestionAnswer = new FinalQuestionAnswer(question,FinalOptions,Answer,1);
+			theSubject.addFinalQuestionAnswer(finalQuestionAnswer);
+			
+		}else {
+			
+			int questionNumber = theSubject.getFinalQuestionAnswer().size() + 1;
+			FinalQuestionAnswer finalQuestionAnswer = new FinalQuestionAnswer(question,FinalOptions,Answer,questionNumber);
+			theSubject.addFinalQuestionAnswer(finalQuestionAnswer);
+		}
+		subjectRepository.save(theSubject);
+		
 	}
 	
 	

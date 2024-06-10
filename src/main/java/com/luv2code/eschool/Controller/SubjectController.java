@@ -3,6 +3,7 @@ package com.luv2code.eschool.Controller;
 import java.util.List;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -31,6 +32,15 @@ public class SubjectController {
 		return All;
 	}
 
+	@GetMapping("/getOneSubject/{Subject_id}")
+	@Operation(summary = "Get data of a specific subject")
+	public Subject getOneSubject (@PathVariable(value="Subject_id") int SubjectId,Model theModel) {
+		
+		return subjectService.getSubjectById(SubjectId);
+		
+	}
+	
+	
 	@GetMapping("/subjectNames")
 	@Operation(summary = "Get Subjects Names")
 	public List<Object> SubjectNames(Model theModel){
@@ -55,5 +65,17 @@ public class SubjectController {
 		subjectService.save(subjectId, title, description, teacherId);
 		
 	}
+	
+	@PostMapping("/AddFinalQuestionAnswer/{subjectId}")
+	@Operation(summary = "Add new Finel Question and Answer for a specific subject")
+	public void AddFinalQuestionAnswer(@PathVariable("subjectId") int subjectId,
+							           @RequestParam("Question") String question,
+						               @RequestParam("Answer") String Answer,
+						               @RequestParam("options") List<String> options) {
+		
+		subjectService.AddSubjectFinelTest(subjectId, question, Answer, options);
+	}
+	
+	
 	
 }

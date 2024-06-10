@@ -1,11 +1,10 @@
 package com.luv2code.eschool.Entity;
 
+import java.util.ArrayList;
 import java.util.List;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.CascadeType;
-import jakarta.persistence.CollectionTable;
 import jakarta.persistence.Column;
-import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -31,6 +30,9 @@ public class Subject {
 	@Column(name="description")
 	private String description;
 	
+	@Column(name="picture_url")
+	private String pictureURL;
+	
 	@ManyToOne(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH} )
 	@JoinColumn(name="teacher_id")
 	private Teacher teacher;
@@ -42,7 +44,9 @@ public class Subject {
 	private List<Unite> unite;
 
 
-	
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name="subject_id")
+    private List<FinalQuestionAnswer> finalQuestionAnswer;
 
 	
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -61,9 +65,25 @@ public class Subject {
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
+	public List<FinalQuestionAnswer> getFinalQuestionAnswer() {
+		return finalQuestionAnswer;
+	}
+
+
+	public void setFinalQuestionAnswer(List<FinalQuestionAnswer> finalFinalQuestionAnswer) {
+		this.finalQuestionAnswer = finalFinalQuestionAnswer;
+	}
 
 	public int getId() {
 		return id;
+	}
+
+	public String getPictureURL() {
+		return pictureURL;
+	}
+
+	public void setPictureURL(String pictureURL) {
+		this.pictureURL = pictureURL;
 	}
 
 	public String getDescription() {
@@ -104,8 +124,14 @@ public class Subject {
 		this.teacher = teacher;
 	}
 
-
-	
+	public void addFinalQuestionAnswer (FinalQuestionAnswer theFinalQuestionAnswer) {
+		
+		if (finalQuestionAnswer==null) {
+			finalQuestionAnswer=new ArrayList<>();
+		}
+		finalQuestionAnswer.add(theFinalQuestionAnswer);
+		
+	}
 	
 	
 }

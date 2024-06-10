@@ -34,11 +34,10 @@ public class StudentService  {
 		Optional<Student> result = studentRepostiory.findById(theId);
 		Student theStudent = new Student() ;
 		if(result.isPresent()) {
-			theStudent=result.get();
+			return result.get();
 		}else {
 			throw new RuntimeException("Did not find this Student id " + theId);
 		}
-		return theStudent;
 		
 	}
 	

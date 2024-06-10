@@ -26,7 +26,7 @@ public class ParentService {
 			
 			theParent=result.get();
 		}else {
-			throw new RuntimeException("Did not find this parent id - " + theId);
+			throw new RuntimeException("Did not find this parent id - " + theId + " :-(");
 		}
 		return theParent;
 	}

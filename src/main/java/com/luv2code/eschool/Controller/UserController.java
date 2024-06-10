@@ -1,5 +1,6 @@
 package com.luv2code.eschool.Controller;
 
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -104,5 +105,11 @@ public class UserController {
 	}
 	
 	
+	@PostMapping("/getUserByEmail")
+	@Operation(summary = "get a data of a Specific User by his user")
+	public User getUserByEmail (@RequestParam("email")String theEmail) {
+		
+		return userService.getUserByEmail(theEmail);
+	}
 	
 }
