@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import com.luv2code.eschool.Entity.Exercise;
 import com.luv2code.eschool.Entity.Lesson;
 import com.luv2code.eschool.Entity.QuestionAndAnswer;
+import com.luv2code.eschool.Entity.Unite;
 import com.luv2code.eschool.repository.ExerciseRepository;
 
 @Service
@@ -15,10 +16,16 @@ public class ExerciseService {
 	
 	private ExerciseRepository exerciseRepository;
 	private LessonService lessonService;
+	private SubjectService subjectService;
+	private UniteService uniteService;
+	
 	@Autowired
-	public ExerciseService(ExerciseRepository exerciseRepository,LessonService lessonService) {
+	public ExerciseService(ExerciseRepository exerciseRepository,LessonService lessonService,
+						   SubjectService subjectService,UniteService uniteService) {
 		this.exerciseRepository = exerciseRepository;
-		this.lessonService = lessonService;
+		this.lessonService      = lessonService;
+		this.subjectService     = subjectService;
+		this.uniteService       = uniteService;
 	}
 	
 	public List<Exercise> findAll() {
@@ -36,7 +43,7 @@ public class ExerciseService {
 		}
 		return theExercise;
 	}
-
+	
 	public void AddLessonExercise (int subjectId,int uniteNumber,int lessonNumber,
 								   String question, String Answer,List<String> options) {
 		
@@ -57,11 +64,32 @@ public class ExerciseService {
 			
 			QuestionAndAnswer questionAndAnswer = new QuestionAndAnswer(question,options,Answer,questionNumber);
 			theExercise.addQuestionAndAnswer(questionAndAnswer);
-			exerciseRepository.save(theExercise);
-			
+			exerciseRepository.save(theExercise);	
 		}
-		
 	}
 	
-	
+	public void AddUniteExercise(int subjectId,int uniteNumber, 
+								String question, String Answer,List<String> options) {
+		
+		Unite theUnite = subjectService.getOneUnite(subjectId, uniteNumber);
+		
+		if(theUnite.getExercise()==null) {
+			
+			Exercise theExercise =new Exercise ();
+			QuestionAndAnswer questionAndAnswer = new QuestionAndAnswer(question,options,Answer,1);
+			theExercise.addQuestionAndAnswer(questionAndAnswer);
+			exerciseRepository.save(theExercise);
+			theUnite.setExercise(theExercise);
+			uniteService.save(theUnite);
+			
+		}else {
+			
+			Exercise theExercise =theUnite.getExercise();
+			int questionNumber = theExercise.getQuestionAndAnswer().size()+1;
+			QuestionAndAnswer questionAndAnswer = new QuestionAndAnswer(question,options,Answer,questionNumber);
+			theExercise.addQuestionAndAnswer(questionAndAnswer);
+			exerciseRepository.save(theExercise);	
+			
+		}
+	}
 }

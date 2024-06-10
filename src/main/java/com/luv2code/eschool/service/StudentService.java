@@ -32,7 +32,6 @@ public class StudentService  {
 	
 	public Student findStudentById(int theId) {
 		Optional<Student> result = studentRepostiory.findById(theId);
-		Student theStudent = new Student() ;
 		if(result.isPresent()) {
 			return result.get();
 		}else {

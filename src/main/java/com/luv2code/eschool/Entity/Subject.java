@@ -132,6 +132,13 @@ public class Subject {
 		finalQuestionAnswer.add(theFinalQuestionAnswer);
 		
 	}
-	
+	public void AddUnite(Unite theUnite) {
+		
+		if(unite==null) {
+			unite=new ArrayList<>();
+		}
+		unite.add(theUnite);
+		theUnite.setSubject(this);
+	}
 	
 }

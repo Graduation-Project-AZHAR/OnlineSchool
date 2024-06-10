@@ -95,13 +95,12 @@ public class SubjectService  {
 	
 	public Unite getOneUnite(int subjectId,int uniteNumber) {
 		List<Unite> unites = getSubjectUnits(subjectId);
-		Unite theUnite=null;
 		for(Unite temp:unites) {
 			if (temp.getNumber()==uniteNumber) {
-				theUnite = temp;
+				return temp;
 			}
 		}
-		return theUnite;
+		throw new RuntimeException("Did not find Unite number : " + subjectId+" / "+uniteNumber+"  :-( ");
 	}
 	
 	

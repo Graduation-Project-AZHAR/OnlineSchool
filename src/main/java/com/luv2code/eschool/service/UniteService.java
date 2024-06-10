@@ -2,8 +2,6 @@ package com.luv2code.eschool.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.luv2code.eschool.Demo.DAO;
 import com.luv2code.eschool.Entity.Unite;
 import com.luv2code.eschool.repository.UniteRepository;
 
@@ -11,17 +9,10 @@ import com.luv2code.eschool.repository.UniteRepository;
 public class UniteService {
 	
 	private UniteRepository uniteRepository;
-	private DAO dao;
 	
 	@Autowired
-	public UniteService(UniteRepository uniteRepository,DAO dao) {
+	public UniteService(UniteRepository uniteRepository) {
 		this.uniteRepository = uniteRepository;
-		this.dao=dao;
-	}
-	
-	public Unite findByNumberAndSubjectId(int Number,int SubjectId) {
-		
-		return dao.findByNumberAndSubjectId(Number, SubjectId);
 		
 	}
 	

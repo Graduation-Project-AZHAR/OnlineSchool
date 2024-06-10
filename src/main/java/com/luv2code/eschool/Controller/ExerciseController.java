@@ -35,7 +35,7 @@ public class ExerciseController {
 	
 	@GetMapping("/getOneExercise/{exercise_id}")
 	@Operation(summary = "Get one Exercise data")
-	public Exercise getOneExercise(@PathVariable(value="exercise_id") int exerciseId,Model theModel){
+	public Exercise getOneExercise(@PathVariable("exercise_id") int exerciseId,Model theModel){
 		Exercise theExercise = exerciseService.findById(exerciseId);
 		return theExercise;
 	}
@@ -52,7 +52,17 @@ public class ExerciseController {
 		
 	}
 	
-	
+	@PostMapping("/AddUniteExercise/{subjectId}/{uniteNumber}")
+	@Operation(summary="Add new Exercise for a specific unite")
+	public void AddUniteExercise (@PathVariable("subjectId") int subjectId,
+						           @PathVariable("uniteNumber") int uniteNumber,
+						           @RequestParam("Question") String question,
+			                       @RequestParam("Answer") String Answer,
+			                       @RequestParam("options") List<String> options) {
+		
+		exerciseService.AddUniteExercise(subjectId, uniteNumber, question, Answer, options);
+		
+	}
 	
 	
 }
