@@ -35,7 +35,7 @@ public class FinalTestController {
 	@Operation(summary = "Add Grade for a specific Student in a specific subject")
 	public void AddGrade(@PathVariable("subject_id") int subjectId,
 						 @PathVariable("student_id") int studentId,
-						 @RequestParam("grade")int grade) {
+						 @RequestParam("grade")		 int grade) {
 		
 		Student theStudent =studentService.findStudentById(studentId);
 		Subject theSubject =subjectService.getSubjectById(subjectId);

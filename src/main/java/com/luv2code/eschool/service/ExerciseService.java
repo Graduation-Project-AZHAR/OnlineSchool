@@ -91,5 +91,7 @@ public class ExerciseService {
 			exerciseRepository.save(theExercise);	
 			
 		}
+		
 	}
+
 }
