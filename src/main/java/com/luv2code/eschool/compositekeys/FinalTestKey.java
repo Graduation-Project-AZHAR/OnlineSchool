@@ -1,6 +1,8 @@
 package com.luv2code.eschool.compositekeys;
 
 import java.io.Serializable;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.luv2code.eschool.Entity.Student;
 import com.luv2code.eschool.Entity.Subject;
 import jakarta.persistence.Embeddable;
@@ -12,10 +14,12 @@ public class FinalTestKey implements Serializable {
 	
 	@ManyToOne
 	@JoinColumn(name="student_id")
+	@JsonIgnore
 	private Student student;
 
 	@ManyToOne
 	@JoinColumn(name="subject_id")
+	@JsonIgnore
 	private Subject subject;
 	
 
@@ -28,8 +32,16 @@ public class FinalTestKey implements Serializable {
 		this.student = student;
 		this.subject = subject;
 	}
+	public int getStudentNumber() {
+		return student.getId();
+	}
 
 
+	public int getSubjectNumber() {
+		return subject.getId();
+	}
+	
+	
 	public Student getStudent() {
 		return student;
 	}

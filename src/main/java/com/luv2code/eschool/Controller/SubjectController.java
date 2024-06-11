@@ -26,7 +26,7 @@ public class SubjectController {
 	
 
 	@GetMapping("/subjects")
-	@Operation(summary = "Get Subject data")
+	@Operation(summary = "Get All Subjects data")
 	public List<Subject> SubjectList(Model theModel){
 		List<Subject> All = subjectService.findAll();
 		return All;

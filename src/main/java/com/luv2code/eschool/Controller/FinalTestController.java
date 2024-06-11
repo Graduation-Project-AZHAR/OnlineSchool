@@ -1,4 +1,7 @@
 package com.luv2code.eschool.Controller;
+import java.util.List;
+
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -44,5 +47,14 @@ public class FinalTestController {
 		FinalTest finalTest = new FinalTest(theKey,grade);
 		finalTestService.save(finalTest);
 	}
+	
+	@GetMapping("/getStudentTestGrads/{student_id}")
+	@Operation(summary = "get Final Test grades for a specific Student")
+	public List<FinalTest> getStudentTestGrads (@PathVariable("student_id") int studentId){
+		
+		return finalTestService.getStudentTestGrads(studentId);
+		
+	}
+	
 	
 }

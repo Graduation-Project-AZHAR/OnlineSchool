@@ -30,7 +30,7 @@ public class SolveController {
 	}
 	
 	@PostMapping("/addGrade/{exerciseNumber}/{student_id}")
-	@Operation(summary = "Add Grade for a specific Student in a specific subject")
+	@Operation(summary = "Add Grade for a specific Student in a specific Exercise")
 	public void AddGrade(@PathVariable("exerciseNumber") int exerciseNumber,
 						 @PathVariable("student_id") int studentId,
 						 @RequestParam("grade")		 int grade) {
