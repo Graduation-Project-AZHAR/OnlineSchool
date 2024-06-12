@@ -1,5 +1,8 @@
 package com.luv2code.eschool.Controller;
 
+import java.util.List;
+
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,18 +18,14 @@ import com.luv2code.eschool.service.StudentService;
 import io.swagger.v3.oas.annotations.Operation;
 
 @RestController
-@RequestMapping("/exerciseSolve")
+@RequestMapping("/solve")
 public class SolveController {
 
 	private SolveService    solveService ;
-	private StudentService  studentService;
-	private ExerciseService exerciseService;
 	
 	
-	public SolveController (SolveService solveService,StudentService studentService,ExerciseService exerciseService) {
+	public SolveController (SolveService solveService) {
 		this.solveService    = solveService;
-		this.studentService  = studentService;
-		this.exerciseService = exerciseService;
 	}
 	
 	@PostMapping("/addGrade/{exerciseNumber}/{student_id}")
@@ -35,15 +34,28 @@ public class SolveController {
 						 @PathVariable("student_id") int studentId,
 						 @RequestParam("grade")		 int grade) {
 		
-		Student  theStudent  = studentService.findStudentById(studentId);
-		Exercise theExercise = exerciseService.findById(exerciseNumber);
 		
-		SolveKey theKey = new SolveKey(theStudent,theExercise);
+		SolveKey theKey = solveService.getSolveKey(studentId, exerciseNumber);
 		
 		solve theSolve = new solve (theKey,grade);
 		solveService.save(theSolve);
 		
 	}
 	
+	@GetMapping("/getLessonsFlags/{student_id}/{Subject_id}/{unite_number}")
+	@Operation(summary = "get Flags for Lessons in specific Unite")
+	public List<Object> LessonsFlags (@PathVariable("Subject_id") int subjectId,
+									  @PathVariable("unite_number") int uniteNumber,
+								   	  @PathVariable("student_id") int studentId){
+		
+		return solveService.LessonsFlags(subjectId, uniteNumber, studentId);
+	}
 	
+	@GetMapping("/getUnitesFlags/{student_id}/{Subject_id}")
+	@Operation(summary = "get Flags for Lessons in specific Unite")
+	public List<Object> UnitesFlags ( @PathVariable("Subject_id") int subjectId,
+								   	  @PathVariable("student_id") int studentId){
+		
+		return solveService.UnitesFlags(subjectId, studentId);
+	}
 }

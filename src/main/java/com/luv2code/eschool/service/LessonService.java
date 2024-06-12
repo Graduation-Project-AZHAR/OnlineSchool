@@ -64,7 +64,6 @@ public class LessonService {
 			}
 		}
 		throw new RuntimeException("\n////////////////////////////\nDid not find this Lesson :-( \n////////////////////////////\n");
-		
 	}
 	
 	

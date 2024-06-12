@@ -31,15 +31,15 @@ public class ExerciseService {
 	public List<Exercise> findAll() {
 		return exerciseRepository.findAll();
 	}
-	public Exercise findById(int exerciseId) {
+	public Exercise findById(int exerciseNimber) {
 		
-		Optional<Exercise> result = exerciseRepository.findById(exerciseId);
+		Optional<Exercise> result = exerciseRepository.findById(exerciseNimber);
 		Exercise theExercise = null;
 		
 		if(result.isPresent()) {
 			theExercise=result.get();
 		}else {
-			throw new RuntimeException("Did not find employee id - ");
+			throw new RuntimeException("Did not find exercise Nimber :-( ");
 		}
 		return theExercise;
 	}

@@ -32,6 +32,12 @@ public class FinalTestKey implements Serializable {
 		this.student = student;
 		this.subject = subject;
 	}
+	
+
+	public String getSubjectTitle() {
+		return subject.getTitle();
+	}
+	
 	public int getStudentNumber() {
 		return student.getId();
 	}

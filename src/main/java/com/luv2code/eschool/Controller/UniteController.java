@@ -1,5 +1,6 @@
 package com.luv2code.eschool.Controller;
 
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -37,9 +38,14 @@ public class UniteController {
 		Subject theSubject= subjectService.getSubjectById(subjectId);
 		theSubject.AddUnite(theUnit);
 		subjectService.save(theSubject);
+	}
+	@GetMapping("/getOneUnite/{Subject_id}/{unite_number}")
+	@Operation(summary="get data of a specific unite")
+	public Unite getOneUnite (@PathVariable("Subject_id") int subjectId,
+							  @PathVariable("unite_number") int uniteNumber) {
 		
+		return subjectService.getOneUnite(subjectId, uniteNumber);
 		
 	}
-	
 	
 }

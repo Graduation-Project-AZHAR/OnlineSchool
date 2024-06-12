@@ -105,13 +105,11 @@ public class SubjectService  {
 	
 	
 	public List<Lesson> getUnitLessons(int subjectId,int uniteNumber){
-		
 		return getOneUnite(subjectId,uniteNumber).getLesson();
 	}
 	
 	
 	public void save(Subject theSubject) {
-		
 		subjectRepository.save(theSubject);
 	}
 	
@@ -119,7 +117,6 @@ public class SubjectService  {
 	public void save (int subjectId,String title,String description ,Integer teacherId) {
 		
 		Subject theSubject = getSubjectById(subjectId);
-		
 		if(title!=null) {
 			theSubject.setTitle(title);}
 		if(description!=null) {
