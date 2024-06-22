@@ -37,10 +37,12 @@ public class Subject {
 	private String pictureURL;
 
 
-	@ElementCollection
-    @CollectionTable(name="interactiveURL")
-    @Column(name="interactiveURL")
-    private List<String> interactiveURL;
+
+    @Column(name="contentOfFirstTerm")
+    private String contentOfFirstTerm ;
+    
+    @Column(name="contentOfSecondTeam")
+    private String contentOfSecondTeam ;
 	
 	@ManyToOne(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH} )
 	@JoinColumn(name="teacher_id")
@@ -63,25 +65,35 @@ public class Subject {
 		
 	}
 
-public Subject(String title, String description, String pictureURL, List<String> interactiveURL) {
+public Subject(String title, String description, String pictureURL, String contentOfFirstTerm,String contentOfSecondTeam) {
 	super();
 	this.title = title;
 	this.description = description;
 	this.pictureURL = pictureURL;
-	this.interactiveURL = interactiveURL;
+	this.contentOfFirstTerm = contentOfFirstTerm;
+	this.contentOfSecondTeam = contentOfSecondTeam;
 }
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-	public List<String> getinteractiveURL() {
-		return interactiveURL;
-	}
 
-	public void setinteractiveURL(List<String> interactiveURL) {
-		this.interactiveURL = interactiveURL;
-	}
+	public String getContentOfFirstTerm() {
+	return contentOfFirstTerm;
+}
+
+public void setContentOfFirstTerm(String contentOfFirstTerm) {
+	this.contentOfFirstTerm = contentOfFirstTerm;
+}
+
+public String getContentOfSecondTeam() {
+	return contentOfSecondTeam;
+}
+
+public void setContentOfSecondTeam(String contentOfSecondTeam) {
+	this.contentOfSecondTeam = contentOfSecondTeam;
+}
 
 	public List<FinalQuestionAnswer> getFinalQuestionAnswer() {
 		return finalQuestionAnswer;

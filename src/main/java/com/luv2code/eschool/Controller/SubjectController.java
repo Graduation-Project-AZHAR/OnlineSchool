@@ -64,9 +64,10 @@ public class SubjectController {
 							  @RequestParam(value="title",required = false)String title,
 							  @RequestParam(value="description",required = false) String description,
 							  @RequestParam(value="teacherId",required = false) Integer teacherId,
-							  @RequestParam(value="interactiveURL",required = false)List<String> interactiveURL) {
+							  @RequestParam(value="contentOfFirstTerm",required = false)String contentOfFirstTerm,
+							  @RequestParam(value="contentOfSecondTeam",required = false)String contentOfSecondTeam) {
 		
-		subjectService.save(subjectId, title, description, teacherId,interactiveURL);
+		subjectService.save(subjectId, title, description, teacherId,contentOfFirstTerm,contentOfSecondTeam);
 		
 	}
 	
