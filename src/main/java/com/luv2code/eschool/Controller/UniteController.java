@@ -1,5 +1,6 @@
 package com.luv2code.eschool.Controller;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,6 +17,7 @@ import io.swagger.v3.oas.annotations.Operation;
 
 @RestController
 @RequestMapping("/unite")
+@CrossOrigin(origins = "*")
 public class UniteController {
 	
 	private UniteService uniteService;

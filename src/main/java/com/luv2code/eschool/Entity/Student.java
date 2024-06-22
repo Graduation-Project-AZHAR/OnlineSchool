@@ -23,7 +23,6 @@ public class Student extends User {
 
 	@ManyToOne(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH} )
 	@JoinColumn(name="parent_id")
-	@JsonIgnore
 	private Parent parent;
 	
 	
@@ -44,7 +43,7 @@ public class Student extends User {
 	}
 	
 	public Student(String name, String personalPhoto, String email, String password) {
-		super(name, personalPhoto, email, password,"student");
+		super(name, personalPhoto, email, password);
 		// TODO Auto-generated constructor stub
 	}
 

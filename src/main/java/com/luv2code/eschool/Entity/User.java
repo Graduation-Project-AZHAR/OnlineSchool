@@ -1,7 +1,14 @@
 package com.luv2code.eschool.Entity;
 
+import java.util.Collection;
+import java.util.List;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -12,7 +19,7 @@ import jakarta.persistence.Table;
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 @Table(name="user")
-public class User {
+public class User implements UserDetails {
 
 	@Id
 	@GeneratedValue(strategy =GenerationType.IDENTITY)
@@ -34,47 +41,32 @@ public class User {
 	@Column(name="password")
 	private String password;
 	
-	@Column(name="User_type")
-	private String UserType;
+	@Enumerated(EnumType.STRING)
+	private Role role;
 	
 	public User() {
 		
 	}
 
-	public User(String name, String personalPhoto, String email, String password,String UserType) {
+	public User(String name, String personalPhoto, String email, String password) {
 		super();
 		this.name          = name;
 		this.personalPhoto = personalPhoto;
 		this.email         = email;
 		this.password      = password;
-		this.UserType      = UserType;
 		this.active  =1;
 	}
 
 	
 	
 	
-	public String getUserType() {
-		return UserType;
-	}
-
-	public void setUserType(String userType) {
-		UserType = userType;
-	}
-
 	public int getId() {
 		return id;
 	}
 
-
-
-
 	public void setId(int id) {
 		this.id = id;
 	}
-
-
-
 
 	public String getName() {
 		return name;
@@ -119,7 +111,49 @@ public class User {
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", name=" + name + ", personalPhoto=" + personalPhoto + ", active=" + active
-				+ ", email=" + email + ", password=" + password + ", UserType=" + UserType + "]";
+				+ ", email=" + email + ", password=" + password + "]";
+	}
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+	    return List.of(new SimpleGrantedAuthority("ROLE_" + role.name()));
+	}
+
+
+	@Override
+	public String getUsername() {
+		return email;
+	}
+
+	public Role getRole() {
+		return role;
+	}
+
+	public void setRole(Role role) {
+		this.role = role;
+	}
+
+	@Override
+	public boolean isAccountNonExpired() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	@Override
+	public boolean isAccountNonLocked() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		// TODO Auto-generated method stub
+		return true;
 	}
 	
 	

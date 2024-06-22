@@ -23,7 +23,7 @@ public class Parent extends User {
 	}
 	
 	public Parent(String name, String personalPhoto, String email, String password) {
-		super(name, personalPhoto, email, password,"parent");
+		super(name, personalPhoto, email, password);
 		
 	}
 	

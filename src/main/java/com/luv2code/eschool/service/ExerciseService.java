@@ -56,7 +56,7 @@ public class ExerciseService {
 		theExercise.addQuestionAndAnswer(questionAndAnswer);
 		exerciseRepository.save(theExercise);
 		theLesson.setExercise(theExercise);
-		lessonService.updateLesson(theLesson);
+		lessonService.save(theLesson);
 		}else {
 			Exercise theExercise =theLesson.getExercise();
 			

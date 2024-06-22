@@ -2,23 +2,21 @@ package com.luv2code.eschool.Controller;
 
 import java.util.List;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import com.luv2code.eschool.Entity.Exercise;
-import com.luv2code.eschool.Entity.Student;
 import com.luv2code.eschool.Entity.solve;
 import com.luv2code.eschool.compositekeys.SolveKey;
-import com.luv2code.eschool.service.ExerciseService;
 import com.luv2code.eschool.service.SolveService;
-import com.luv2code.eschool.service.StudentService;
 import io.swagger.v3.oas.annotations.Operation;
 
 @RestController
 @RequestMapping("/solve")
+@CrossOrigin(origins = "*")
 public class SolveController {
 
 	private SolveService    solveService ;
@@ -42,6 +40,25 @@ public class SolveController {
 		
 	}
 	
+	@GetMapping("/getLessonsGrades/{student_id}/{Subject_id}/{unite_number}")
+	@Operation(summary = "get Grades for Lessons in specific Unite")
+	public List<Object> LessonsGrades (@PathVariable("Subject_id") int subjectId,
+									  @PathVariable("unite_number") int uniteNumber,
+								   	  @PathVariable("student_id") int studentId){
+		
+		return solveService.LessonsGrades(subjectId, uniteNumber, studentId);
+	}
+	
+	@GetMapping("/getUnitesGrades/{student_id}/{Subject_id}")
+	@Operation(summary = "get Grades for Units in specific Subject")
+	public List<Object> UnitesGrades ( @PathVariable("Subject_id") int subjectId,
+								   	  @PathVariable("student_id") int studentId){
+		
+		return solveService.UnitesFlags(subjectId, studentId);
+	}
+	
+	
+	
 	@GetMapping("/getLessonsFlags/{student_id}/{Subject_id}/{unite_number}")
 	@Operation(summary = "get Flags for Lessons in specific Unite")
 	public List<Object> LessonsFlags (@PathVariable("Subject_id") int subjectId,
@@ -52,7 +69,7 @@ public class SolveController {
 	}
 	
 	@GetMapping("/getUnitesFlags/{student_id}/{Subject_id}")
-	@Operation(summary = "get Flags for Lessons in specific Unite")
+	@Operation(summary = "get Flags for Units in specific Subject")
 	public List<Object> UnitesFlags ( @PathVariable("Subject_id") int subjectId,
 								   	  @PathVariable("student_id") int studentId){
 		

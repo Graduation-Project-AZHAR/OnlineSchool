@@ -78,6 +78,40 @@ public class SolveService {
 	} 
 	
 	
+	
+	public List<Object> LessonsGrades (int subjectId,int uniteNumber,int studentId){
+		
+		List<Lesson> Lessons= subjectService.getUnitLessons(subjectId, uniteNumber);
+		List<Object> lessonsGrades= new ArrayList<Object>();
+		for(Lesson tempLesson : Lessons) {
+			Map<String, Object> lessonsGradsMap = new HashMap<>();
+			lessonsGradsMap.put("lessonNumber", tempLesson.getNumber());
+			lessonsGradsMap.put("lessonTitle", tempLesson.getTitle());
+			lessonsGradsMap.put("Grade",getExerciseGrade(tempLesson.getExercise().getNumber(),studentId));
+			lessonsGradsMap.put("QuestionNumber", tempLesson.getExercise().getQuestionAndAnswer().size());
+			lessonsGrades.add(lessonsGradsMap);
+		}	
+		return lessonsGrades;
+	}
+	
+	public List<Object> UnitesGrades (int subjectId,int studentId){
+		
+		List<Unite> Unites = subjectService.getSubjectUnits(subjectId);
+		List<Object> unitesGrades = new ArrayList<Object>();
+		
+		for(Unite temoUnite : Unites) {
+			Map<String,Object> unitesGradesMap= new HashMap<>();
+			unitesGradesMap.put("UniteTitle", temoUnite.getTitle());
+			unitesGradesMap.put("UniteNumber", temoUnite.getNumber());
+			unitesGradesMap.put("Grade",getExerciseGrade(temoUnite.getExercise().getNumber(),studentId));
+			unitesGradesMap.put("QuestionNumber", temoUnite.getExercise().getQuestionAndAnswer().size());
+			unitesGrades.add(unitesGradesMap);
+		}
+		
+	return unitesGrades;
+	}
+	
+	
 	public List<Object> LessonsFlags (int subjectId,int uniteNumber,int studentId) {
 		
 		List<Lesson> Lessons= subjectService.getUnitLessons(subjectId, uniteNumber);
@@ -99,6 +133,9 @@ public class SolveService {
 		}
 		return lessonsFlags;
 	}
+	
+	
+	
 	public List<Object> UnitesFlags (int subjectId,int studentId){
 		
 		List<Unite> Unites = subjectService.getSubjectUnits(subjectId);

@@ -4,13 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.CollectionTable;
 import jakarta.persistence.Column;
+import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
@@ -32,6 +35,12 @@ public class Subject {
 	
 	@Column(name="picture_url")
 	private String pictureURL;
+
+
+	@ElementCollection
+    @CollectionTable(name="interactiveURL")
+    @Column(name="interactiveURL")
+    private List<String> interactiveURL;
 	
 	@ManyToOne(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH} )
 	@JoinColumn(name="teacher_id")
@@ -54,16 +63,25 @@ public class Subject {
 		
 	}
 
-	public Subject( String title, String description) {
-		super();
-		this.title = title;
-		this.description = description;
-	}
-	
-	
-	
+public Subject(String title, String description, String pictureURL, List<String> interactiveURL) {
+	super();
+	this.title = title;
+	this.description = description;
+	this.pictureURL = pictureURL;
+	this.interactiveURL = interactiveURL;
+}
+
+
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+
+	public List<String> getinteractiveURL() {
+		return interactiveURL;
+	}
+
+	public void setinteractiveURL(List<String> interactiveURL) {
+		this.interactiveURL = interactiveURL;
+	}
 
 	public List<FinalQuestionAnswer> getFinalQuestionAnswer() {
 		return finalQuestionAnswer;

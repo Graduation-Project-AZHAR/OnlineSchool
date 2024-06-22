@@ -1,88 +1,97 @@
 package com.luv2code.eschool.Controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import com.luv2code.eschool.Controller.auth.*;
 import com.luv2code.eschool.Entity.*;
-import com.luv2code.eschool.service.ParentService;
-import com.luv2code.eschool.service.StudentService;
-import com.luv2code.eschool.service.TeacherService;
 import com.luv2code.eschool.service.UserService;
 
 import io.swagger.v3.oas.annotations.Operation;
 
 @RestController
 @RequestMapping("/user")
+@CrossOrigin(origins = "*")
 public class UserController {
 	
 	private UserService    userService;
-	private StudentService studentService;
-	private ParentService  parentService;
-	private TeacherService teacherService;
 	
 	
-	public UserController (UserService userService,StudentService studentService,
-						   ParentService parentService,TeacherService teacherService) {
+	public UserController (UserService userService) {
 		
 		this.userService    = userService;
-		this.studentService = studentService;
-		this.parentService  = parentService;
-		this.teacherService = teacherService;
+	}
+	
+//	
+//	@PostMapping("/register")
+//	@Operation(summary = "new security ")
+//	public ResponseEntity<AuthenticationResponse> register(@RequestBody StudentRequest request){
+//		
+//		return ResponseEntity.ok(userService.request(request));
+//	}
+	
+	@PostMapping("/api/authenticate")
+	@Operation(summary = "login and return a token ")
+	public ResponseEntity<Object> authenticate(@RequestBody AuthenticateRequest request){
+		
+		return ResponseEntity.ok(userService.authenticate(request));
 	}
 	
 
-	@PostMapping("isEmailUsed")
+	
+	
+	@PostMapping("/api/isEmailUsed")
 	@Operation(summary = "check if the Email is used or not")
 	public boolean isEmailUsed (@RequestParam("email")String theEmail) {
 		return userService.checkUsedEmails(theEmail);
 	}
 	
 	
-	@PostMapping("/StudentSignUp")
+	@PostMapping("/api/StudentSignUp")
 	@Operation(summary = "Add new Student")
-	public void StudentSignUp(  @RequestParam("email")String theEmail,
+	public ResponseEntity<AuthenticationResponse> StudentSignUp(  
+								@RequestParam("email")String theEmail,
 								@RequestParam("name")String name,
 							 	@RequestParam("password")String password,
 							   	@RequestParam("parent_email")String parentEmail) {
-		
 		if(userService.checkUsedEmails(theEmail)) {
-		Parent theParent = new Parent();
-		int parentId = userService.getUserByEmail(parentEmail).getId();
-		theParent = parentService.getParentById(parentId);
-		Student theStudent= new Student(name,"", theEmail,password);
-		theStudent.setParent(theParent);
-		theStudent.setTimeSpent(0);
-		studentService.save(theStudent);
-		
+			UserRequest request = new UserRequest(name,theEmail,password,parentEmail);
+		return ResponseEntity.ok(userService.StudentRequest(request));
 		}else {
 			throw new RuntimeException("this Email is Already used :-( ");
 		}
 	}
 	
-	@PostMapping("/ParentSignUp")
+	
+	@PostMapping("/api/ParentSignUp")
 	@Operation(summary = "Add new Parent")
-	public void ParentSignUp(   @RequestParam("email")String theEmail,
+	public ResponseEntity<AuthenticationResponse> ParentSignUp(   @RequestParam("email")String theEmail,
 								@RequestParam("name")String name,
 							 	@RequestParam("password")String password) {
 		
 		if(userService.checkUsedEmails(theEmail)) {
-			Parent theParent = new Parent(name,"", theEmail,password);
-			parentService.save(theParent);
+		UserRequest request = new UserRequest(name,theEmail,password,null);
+		return ResponseEntity.ok(userService.ParentRequest(request));
 		}else {
 			throw new RuntimeException("this Email is Already used :-( ");
 		}
 	}
+	
+	
+	
 	@PostMapping("/addTeacher")
 	@Operation(summary = "Add new teacher by Manger")
-	public void AddTeacher(@RequestParam("name")String name,
+	public ResponseEntity<AuthenticationResponse> AddTeacher(@RequestParam("name")String name,
 						   @RequestParam("email")String Email,
 						   @RequestParam("password")String password ) {
 		
 		if(userService.checkUsedEmails(Email)) {
-			Teacher theTeacher = new Teacher(name,"",Email,password);
-			teacherService.save(theTeacher);
+			UserRequest request = new UserRequest(name,Email,password,null);
+			return ResponseEntity.ok(userService.TeacherRequest(request));
 		}else {
 			throw new RuntimeException("this Email is Already used :-( ");
 		}
@@ -90,19 +99,19 @@ public class UserController {
 	}
 	
 	
-	@PostMapping("/login")
-	@Operation(summary = "login and return User type(student,teacher,parent ....) or return false if the Email or password is incorrect")
-	public String login(@RequestParam("email")String theEmail,
-						@RequestParam("password")String password) {
-		User theUser =userService.login(theEmail, password);
-		if (theUser==null) {
-			return "false";
-		}else {
-		String UserType = theUser.getUserType();
-		return UserType;
-		}
-		
-	}
+//	@PostMapping("/login")
+//	@Operation(summary = "login and return User type(student,teacher,parent ....) or return false if the Email or password is incorrect")
+//	public String login(@RequestParam("email")String theEmail,
+//						@RequestParam("password")String password) {
+//		User theUser =userService.login(theEmail, password);
+//		if (theUser==null) {
+//			return "false";
+//		}else {
+//		Role UserType = theUser.getRole();
+//		return UserType.toString();
+//		}
+//		
+//	}
 	
 	
 	@PostMapping("/getUserByEmail")

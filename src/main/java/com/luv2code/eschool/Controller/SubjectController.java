@@ -1,6 +1,8 @@
 package com.luv2code.eschool.Controller;
 
 import java.util.List;
+
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,6 +18,7 @@ import io.swagger.v3.oas.annotations.Operation;
 
 @RestController
 @RequestMapping("/subject")
+@CrossOrigin(origins = "*")
 public class SubjectController {
 	
 	private SubjectService  subjectService;
@@ -60,9 +63,10 @@ public class SubjectController {
 	public void UpdateSubject(@PathVariable("subjectId")int subjectId,
 							  @RequestParam(value="title",required = false)String title,
 							  @RequestParam(value="description",required = false) String description,
-							  @RequestParam(value="teacherId",required = false) Integer teacherId) {
+							  @RequestParam(value="teacherId",required = false) Integer teacherId,
+							  @RequestParam(value="interactiveURL",required = false)List<String> interactiveURL) {
 		
-		subjectService.save(subjectId, title, description, teacherId);
+		subjectService.save(subjectId, title, description, teacherId,interactiveURL);
 		
 	}
 	

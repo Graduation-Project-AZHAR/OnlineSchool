@@ -1,10 +1,10 @@
 package com.luv2code.eschool.Controller;
 
 import java.util.List;
+
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.luv2code.eschool.Entity.*;
 import com.luv2code.eschool.service.*;
@@ -13,6 +13,7 @@ import io.swagger.v3.oas.annotations.Operation;
 
 @RestController
 @RequestMapping("/teacher")
+@CrossOrigin(origins = "*")
 public class TeacherController {
 
 	

@@ -77,7 +77,7 @@ public class LessonService {
 		
 	}
 	
-	public void updateLesson(Lesson theLesson) {
+	public void save(Lesson theLesson) {
 		
 		lessonRepository.save(theLesson);
 	}

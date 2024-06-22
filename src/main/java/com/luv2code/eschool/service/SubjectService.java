@@ -114,7 +114,7 @@ public class SubjectService  {
 	}
 	
 	
-	public void save (int subjectId,String title,String description ,Integer teacherId) {
+	public void save (int subjectId,String title,String description ,Integer teacherId,List<String> interactiveURL) {
 		
 		Subject theSubject = getSubjectById(subjectId);
 		if(title!=null) {
@@ -123,6 +123,8 @@ public class SubjectService  {
 			theSubject.setDescription(description);}
 		if(teacherId!=null) {
 			theSubject.setTeacher(teacherService.getTeacherById(teacherId));}
+		if(interactiveURL!=null) {
+			theSubject.setinteractiveURL(interactiveURL);}
 		
 		subjectRepository.save(theSubject);
 	}
