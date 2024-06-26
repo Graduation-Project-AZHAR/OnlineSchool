@@ -109,8 +109,6 @@ public class UserService {
 				.build();
 	}
 
-
-
 	public AuthenticationResponse StudentRequest(UserRequest request) {
 		
 		Student user = new Student() ;
@@ -145,6 +143,13 @@ public class UserService {
 		UserRole.put("UserRole",user.getRole().name() );
 		UserRole.put("token", jwtToken);
 		return UserRole;
+	}
+	
+	public void deleteUser(String email) {
+		
+		User theUser = getUserByEmail(email);
+		userRepository.delete(theUser);
+		
 	}
 	
 	

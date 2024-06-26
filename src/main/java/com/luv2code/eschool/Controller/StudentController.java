@@ -31,6 +31,4 @@ public class StudentController {
 		List<Student> All = studentService.findAll();
 		return All;
 	}
-	
-	
 }

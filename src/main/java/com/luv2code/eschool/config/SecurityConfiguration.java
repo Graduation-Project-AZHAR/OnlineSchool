@@ -44,11 +44,12 @@ public class SecurityConfiguration {
 	
 	private static final String[] ADMIN_URL = {
 			"/user/addTeacher",
-			"/teacher/teachers"
+			"/user/deleteUserByEmail",
+			"/teacher/teachers",
+			"/subject/addSubject"
 			};
 	
 	private static final String[] TEACHER_ADMIN_URL = {
-			"/user/getUserByEmail",
 			"/parent/getOneParent/{parent_id}",
 			"/student/students",
 			"/subject/updateSubject/{subjectId}"

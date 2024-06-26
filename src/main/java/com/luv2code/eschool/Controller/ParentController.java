@@ -28,6 +28,4 @@ public class ParentController {
 		
 		return parentService.getParentById(parentId);
 	}
-	
-	
 }

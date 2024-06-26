@@ -114,7 +114,7 @@ public class SubjectService  {
 	}
 	
 	
-	public void save (int subjectId,String title,String description ,Integer teacherId,String contentOfFirstTerm,String contentOfSecondTeam) {
+	public void save (int subjectId,String title,String description ,Integer teacherId,String pictureURL,String contentOfFirstTerm,String contentOfSecondTeam) {
 		
 		Subject theSubject = getSubjectById(subjectId);
 		if(title!=null) {
@@ -128,6 +128,11 @@ public class SubjectService  {
 		if(contentOfSecondTeam!=null) {
 			theSubject.setContentOfSecondTeam(contentOfSecondTeam);}
 		
+		subjectRepository.save(theSubject);
+	}
+	public void save (String title,String description ,Integer teacherId,String pictureURL,String contentOfFirstTerm,String contentOfSecondTeam) {
+		Subject theSubject = new Subject(title,description,pictureURL,contentOfFirstTerm,contentOfSecondTeam);
+		theSubject.setTeacher(teacherService.getTeacherById(teacherId));
 		subjectRepository.save(theSubject);
 	}
 	

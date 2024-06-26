@@ -26,14 +26,6 @@ public class UserController {
 		this.userService    = userService;
 	}
 	
-//	
-//	@PostMapping("/register")
-//	@Operation(summary = "new security ")
-//	public ResponseEntity<AuthenticationResponse> register(@RequestBody StudentRequest request){
-//		
-//		return ResponseEntity.ok(userService.request(request));
-//	}
-	
 	@PostMapping("/api/authenticate")
 	@Operation(summary = "login and return a token ")
 	public ResponseEntity<Object> authenticate(@RequestBody AuthenticateRequest request){
@@ -84,7 +76,7 @@ public class UserController {
 	
 	
 	@PostMapping("/addTeacher")
-	@Operation(summary = "Add new teacher by Manger")
+	@Operation(summary = "Add new teacher by ADMIN")
 	public ResponseEntity<AuthenticationResponse> AddTeacher(@RequestParam("name")String name,
 						   @RequestParam("email")String Email,
 						   @RequestParam("password")String password ) {
@@ -99,26 +91,20 @@ public class UserController {
 	}
 	
 	
-//	@PostMapping("/login")
-//	@Operation(summary = "login and return User type(student,teacher,parent ....) or return false if the Email or password is incorrect")
-//	public String login(@RequestParam("email")String theEmail,
-//						@RequestParam("password")String password) {
-//		User theUser =userService.login(theEmail, password);
-//		if (theUser==null) {
-//			return "false";
-//		}else {
-//		Role UserType = theUser.getRole();
-//		return UserType.toString();
-//		}
-//		
-//	}
-	
 	
 	@PostMapping("/getUserByEmail")
-	@Operation(summary = "get a data of a Specific User by his user")
+	@Operation(summary = "get a data of a Specific User by his email")
 	public User getUserByEmail (@RequestParam("email")String theEmail) {
 		
 		return userService.getUserByEmail(theEmail);
 	}
+	
+	@PostMapping("/deleteUserByEmail")
+	@Operation(summary = "delete a Specific User by his email")
+	public void deleteUserByEmail (@RequestParam("email")String theEmail) {
+		
+		 userService.deleteUser(theEmail);
+	}
+	
 	
 }

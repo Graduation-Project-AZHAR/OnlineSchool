@@ -54,7 +54,7 @@ public class SolveController {
 	public List<Object> UnitesGrades ( @PathVariable("Subject_id") int subjectId,
 								   	  @PathVariable("student_id") int studentId){
 		
-		return solveService.UnitesFlags(subjectId, studentId);
+		return solveService.UnitesGrades(subjectId, studentId);
 	}
 	
 	

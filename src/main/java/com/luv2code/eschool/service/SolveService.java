@@ -145,12 +145,18 @@ public class SolveService {
 		boolean[] theFlags = new boolean[Unites.size()+1];
     	theFlags[0]=true;
     	
-    	for(Unite temoUnite : Unites) {
-    		theFlags[i+1]=FlagCalculate(getExerciseGrade(temoUnite.getExercise().getNumber(),studentId),
-    									temoUnite.getExercise().getQuestionAndAnswer().size());
+    	for(Unite tempUnite : Unites) {
     		
+    		int grade = getExerciseGrade(tempUnite.getExercise().getNumber(),studentId);
+    		if(grade==0) {
+    			
+    			theFlags[i+1]=false;
+    		}else {
+    		theFlags[i+1]=FlagCalculate(grade,
+    									tempUnite.getExercise().getQuestionAndAnswer().size());
+    		}
     		Map<String,Object> unitesFlagsMap= new HashMap<>();
-    		unitesFlagsMap.put("UniteNumber", temoUnite.getNumber());
+    		unitesFlagsMap.put("UniteNumber", tempUnite.getNumber());
     		unitesFlagsMap.put("Flag", theFlags[i]);
     		UnitesFlags.add(unitesFlagsMap);
 			i=i+1;

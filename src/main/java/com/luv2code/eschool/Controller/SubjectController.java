@@ -64,10 +64,11 @@ public class SubjectController {
 							  @RequestParam(value="title",required = false)String title,
 							  @RequestParam(value="description",required = false) String description,
 							  @RequestParam(value="teacherId",required = false) Integer teacherId,
+							  @RequestParam(value="pictureURL",required = false) String pictureURL,
 							  @RequestParam(value="contentOfFirstTerm",required = false)String contentOfFirstTerm,
 							  @RequestParam(value="contentOfSecondTeam",required = false)String contentOfSecondTeam) {
 		
-		subjectService.save(subjectId, title, description, teacherId,contentOfFirstTerm,contentOfSecondTeam);
+		subjectService.save(subjectId, title, description, teacherId,pictureURL,contentOfFirstTerm,contentOfSecondTeam);
 		
 	}
 	
@@ -81,6 +82,17 @@ public class SubjectController {
 		subjectService.AddSubjectFinelTest(subjectId, question, Answer, options);
 	}
 	
-	
+	@PostMapping("/addSubject")
+	@Operation(summary = "add a new Subject")
+	public void addSubject(	  @RequestParam("title")String title,
+							  @RequestParam("description") String description,
+							  @RequestParam("teacherId") Integer teacherId,
+							  @RequestParam("pictureURL") String pictureURL,
+							  @RequestParam(value="contentOfFirstTerm",required = false)String contentOfFirstTerm,
+							  @RequestParam(value="contentOfSecondTeam",required = false)String contentOfSecondTeam) {
+		
+		subjectService.save( title, description, teacherId,pictureURL,contentOfFirstTerm,contentOfSecondTeam);
+		
+	}
 	
 }
