@@ -80,19 +80,7 @@ public class UserService {
 				.build();
 	}
 	
-	
-//	public User login(String theEmail,String Password) {
-//		
-//		Optional<User> result = userRepository.findByEmailAndPassword(theEmail, Password);
-//		
-//		
-//		if(result.isPresent()) {
-//			return result.get();
-//			
-//		}else {
-//			return null;
-//		}
-//	}
+
 	public AuthenticationResponse ParentRequest(UserRequest request) {
 		
 		Parent user = new Parent() ;
@@ -151,6 +139,25 @@ public class UserService {
 		userRepository.delete(theUser);
 		
 	}
+
+	public void update(String theEmail,String password, String name, String newPassword, String personalPhoto) {
+
+		AuthenticateRequest request = new AuthenticateRequest(theEmail,password);
+		if(authenticate(request)!=null) {
+		
+		User theUser = getUserByEmail(theEmail);
+		if(name!=null) {
+			theUser.setName(name);}
+		if(newPassword!=null) {
+			theUser.setPassword(passwordEncoder.encode(newPassword));}
+		if(personalPhoto!=null) {
+			theUser.setPersonalPhoto(personalPhoto);
+		}
+		userRepository.save(theUser);
+		}
+	}
+	
+	
 	
 	
 }

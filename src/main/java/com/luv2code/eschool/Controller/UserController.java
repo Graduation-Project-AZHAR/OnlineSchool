@@ -3,6 +3,7 @@ package com.luv2code.eschool.Controller;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -105,6 +106,20 @@ public class UserController {
 		
 		 userService.deleteUser(theEmail);
 	}
+	
+	
+	 
+	@PutMapping("/updateUser")
+	@Operation(summary = "update User data")
+	public void updateUser(@RequestParam("email")String theEmail,
+						   @RequestParam("password")String password,
+						   @RequestParam(value="name",required = false)String name,
+					 	   @RequestParam(value="newPassword",required = false)String newPassword,
+					   	   @RequestParam(value="personalPhoto",required = false)String personalPhoto){
+
+		userService.update(theEmail,password,name,newPassword,personalPhoto);
+	}
+	
 	
 	
 }
