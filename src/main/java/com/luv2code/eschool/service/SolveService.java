@@ -122,9 +122,14 @@ public class SolveService {
     	theFlags[0]=true;
     	
 		for(Lesson tempLesson : Lessons) {
-        	theFlags[i+1]=FlagCalculate(getExerciseGrade(tempLesson.getExercise().getNumber(),studentId),
-        								tempLesson.getExercise().getQuestionAndAnswer().size());
 			
+			int grade =getExerciseGrade(tempLesson.getExercise().getNumber(),studentId);
+			if (grade==0) {
+				theFlags[i+1]=false;
+			}else {
+        	theFlags[i+1]=FlagCalculate(grade,
+        								tempLesson.getExercise().getQuestionAndAnswer().size());
+			}
 			Map<String, Object> lessonsFlagsMap = new HashMap<>();
 			lessonsFlagsMap.put("lessonNumber", tempLesson.getNumber());
 			lessonsFlagsMap.put("Flag", theFlags[i]);
