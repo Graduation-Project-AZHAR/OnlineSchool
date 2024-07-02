@@ -1,0 +1,38 @@
+ section {
+     padding: 1rem 3rem;
+     margin: 0 auto;
+     max-width: 1200px;
+ }
+
+
+ .header {
+     position: sticky;
+     top: 0;
+     left: 0;
+     right: 0;
+     background-color: var(--white);
+     z-index: 1000;
+     border-bottom: var(--border);
+ }
+
+ .header .flex {
+     display: flex;
+     align-items: center;
+     justify-content: space-between;
+     position: relative;
+     padding: .5rem 1rem;
+ }
+
+ .user {
+     width: 50px;
+     height: 50px;
+ }
+
+ .photo img {
+     border: 2px solid #ccc;
+     transition: transform 0.3s ease-in-out;
+ }
+
+ .photo img:hover {
+     transform: scale(1.1);
+ }

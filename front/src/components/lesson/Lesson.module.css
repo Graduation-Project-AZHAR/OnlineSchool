@@ -1,0 +1,71 @@
+.user {
+    width: 50px;
+    height: 50px;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.boxcontainer .box {
+    box-shadow: 0 5px 10px rgba(0, 0, 0, .2);
+    border-radius: 5px;
+    background: white;
+    text-align: center;
+    padding: 30px 20px;
+}
+
+.boxcontainer {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(50px, 1fr));
+    gap: 25px;
+    margin: 5px 15px;
+    border-radius: 15px;
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    -ms-border-radius: 15px;
+    -o-border-radius: 15px;
+
+}
+
+.decoration {
+    text-decoration: none;
+}
+
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding-top: 1rem;
+    background-color: #ecf0f3;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 7px 7px 7px 7px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    margin: 20px auto;
+    font-family: 'Arial, sans-serif';
+}
+
+.infoSection {
+    display: flex;
+    align-items: center;;
+}
+
+.userImage {
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+}
+
+.userImage img {
+    width: 100%;
+    height: auto;
+    border-radius: 50%;
+}
+
+.text {
+    margin: 0;
+    padding-top: 0.5rem;
+    font-weight: bold;
+}

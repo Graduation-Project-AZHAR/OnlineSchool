@@ -1,0 +1,62 @@
+
+.notFoundContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+    background-color: #f0f0f0;
+    padding: 20px;
+  }
+  
+  .notFoundContainer h1 {
+    font-size: 4rem;
+    color: #333;
+    margin: 0;
+    animation: bounce 1s infinite;
+  }
+  
+  .notFoundContainer p {
+    font-size: 1.2rem;
+    color: #666;
+    margin: 20px 0;
+  }
+  
+  .notFoundContainer a {
+    font-size: 1rem;
+    color: #007bff;
+    text-decoration: none;
+    border: 1px solid #007bff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  
+  .notFoundContainer a:hover {
+    background-color: #007bff;
+    color: #fff;
+  }
+  
+  @keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+      transform: translateY(0);
+    }
+    40% {
+      transform: translateY(-20px);
+    }
+    60% {
+      transform: translateY(-10px);
+    }
+  }
+  
+  @media (max-width: 600px) {
+    .notFoundContainer h1 {
+      font-size: 2rem;
+    }
+  
+    .notFoundContainer p {
+      font-size: 1rem;
+    }
+  }
+  

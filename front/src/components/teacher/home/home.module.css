@@ -1,0 +1,35 @@
+.boxcontainer .box {
+    box-shadow: 0 5px 10px rgba(0, 0, 0, .2);
+    border-radius: 5px;
+    background: #fff;
+    text-align: center;
+    padding: 30px 20px;
+}
+
+.boxcontainer {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(50px, 1fr));
+    gap: 25px;
+    margin: 5px 15px;
+    border-radius: 15px;
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    -ms-border-radius: 15px;
+    -o-border-radius: 15px;
+
+}
+
+@media (max-width: 1400px) {
+    .boxcontainer {
+        grid-template-columns: repeat(2, minmax(50px, 1fr));
+        gap: 20px;
+    }
+}
+
+/* Adjust the grid for small screens (phones, 480px and below) */
+@media (max-width: 970px) {
+    .boxcontainer {
+        grid-template-columns: repeat(1, minmax(50px, 1fr));
+        gap: 20px;
+    }
+}

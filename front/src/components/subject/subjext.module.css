@@ -1,0 +1,69 @@
+.boxcontainer .box {
+    box-shadow: 0 5px 10px rgba(0, 0, 0, .2);
+    border-radius: 5px;
+    background: #fff;
+    text-align: center;
+    padding: 30px 20px;
+}
+
+.boxcontainer {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(50px, 1fr));
+    gap: 25px;
+    margin: 5px 15px;
+    border-radius: 15px;
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    -ms-border-radius: 15px;
+    -o-border-radius: 15px;
+
+}
+@media (max-width: 1200px) {
+    .boxcontainer {
+        grid-template-columns: repeat(2, minmax(50px, 1fr));
+        gap: 20px;
+    }
+}
+
+/* Adjust the grid for small screens (phones, 480px and below) */
+@media (max-width: 992px) {
+    .boxcontainer {
+        grid-template-columns: repeat(1, minmax(50px, 1fr));
+        gap: 20px;
+    }
+}
+
+
+
+
+.customHeading {
+    font-family: 'Arial', sans-serif; /* Customize font */
+    color: #ffffff; /* Text color */
+    background: linear-gradient(90deg, rgba(29,78,216,1) 0%, rgba(42,167,233,1) 100%); /* Background gradient */
+    padding: 10px 20px; /* Padding */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Shadow for depth */
+    display: inline-block; /* To fit content */
+}
+
+.headerContainer {
+    text-align: center; /* Center the heading */
+    margin-top: 15px;
+}
+
+
+.imageContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    width: 100%; /* or any fixed width you desire */
+    height: 100%; /* or any fixed height you desire */
+    aspect-ratio: 1; /* This ensures the container has a 1:1 aspect ratio */
+  }
+
+  .imageContainer img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* This ensures the image covers the container while maintaining its aspect ratio */
+  }

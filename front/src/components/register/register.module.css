@@ -1,0 +1,24 @@
+.over{
+    overflow: auto;
+    background: white;
+    box-sizing: border-box;
+}
+.bodyy {
+    margin: 0;
+    width: 100vw;
+    background: white;
+    overflow: hidden;
+    font-family: poppins;
+    margin-top: 10px;
+    
+  }
+  
+  .containerr {
+    border-radius: 20px;
+    padding: 0px 40px;
+    box-sizing: border-box;
+    background: #ecf0f3;
+    margin: 30px auto;
+    box-shadow: 14px 14px 20px #cbced1, -14px -14px 20px #cbced1;
+  }
+
